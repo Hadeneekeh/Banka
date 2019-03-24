@@ -1,4 +1,5 @@
 body {
+    font-family: Tahoma;
     margin: 0;
     padding: 0;
     background-image: url(img3.jpg);
@@ -10,17 +11,19 @@ body {
 	width: 0;
 	height: 0;
 	border-top: 10px solid transparent;
-	border-left: 20px solid #a01d26;
+	border-left: 20px solid #acbebe;
 	border-bottom: 10px solid transparent;
 }
 header {
     color: #a01d26;
-    padding: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
 }
 header a {
     color: #f4f4ef;
     text-decoration: none;
-    font-size: 20px;
+    font-size: 18px;
     background: #a01d26;
     padding: 10px;
 }
@@ -28,10 +31,7 @@ header a:hover {
     color: #a01d26;
     background: #f4f4ef;
 }
-/* header button:hover {
-    color: #f4eade;
-    background: #edac72;
-} */
+
 header ul {
     margin: 0;
     padding: 0;
@@ -41,16 +41,20 @@ header li {
     padding: 0 20px 0 20px;
 }
 header #brand-name {
-    float: left;
+    align-self: flex-start;
 }
 header #brand-name h1 {
     margin: 0;
     font-size: 40px;
 }
 header nav {
-    float: right;
+    align-self: flex-end;
     margin-top: 10px;
 }
+/* #landing {
+    display: flex;
+    flex-direction: column;
+} */
 #form-container {
     width: 300px;
 	height: 350px;
@@ -88,4 +92,47 @@ h3 {
     float: right;
     text-align: center;
     margin-top: 60px;
+}
+a {
+    color: #a01d26;
+}
+footer {
+    text-align: center;
+    background: #a01d26;
+    color: #f4f4ef;
+}
+
+
+
+@media screen and (max-width: 760px) {
+    .right-triangle {
+        width: 0;
+        height: 0;
+        border-top: 5px solid transparent;
+        border-left: 10px solid #a01d26;
+        border-bottom: 5px solid transparent;
+    }
+    header a {
+        font-size: 12px;
+    }
+    header #brand-name h1 {
+        font-size: 20px;
+        font-weight: bold;
+    }
+    h3 {
+        line-height: 1.0em;
+    }
+    #form-container,
+    #intro {
+        float: none;
+        width: 80%;
+        transform: skew(360deg);
+        margin: 20px;
+
+    }
+    header nav {
+        align-self: flex-end;
+    }
+
+
 }
