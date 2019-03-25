@@ -68,20 +68,20 @@ header nav {
     background: #f4f4ef;
     float: left;
 }
-input[type=text], input[type=password], input[type=email], input[type=tel] {
+input[type=text], input[type=password], input[type=email], input[type=button] {
     width: 90%;
     padding: 10px;
     margin: 5px 5px 10px 0;
     display: inline-block;
 }
-input[type=submit] {
+input[type=submit], input[type=button] {
     width: 50%;
     padding: 10px;
     margin: 5px 5px 10px 0;
     display: inline-block;
     background: #acbebe;
 }
-input[type=submit]:hover {
+input[type=submit], input[type=button]:hover {
     color: #f4f4ef;
     background-color: #a01d26;
 }
