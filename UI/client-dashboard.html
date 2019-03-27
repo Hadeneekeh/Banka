@@ -8,42 +8,47 @@
     <title>Profile Page</title>
 </head>
 <body>
-    <div>
+    <div class="container">
         <header>
                 <h1>BANKA</h1>
         </header>
         
         <main>
-            <aside>
-                <div id="profilePhoto"></div>
-                <button id="updatePhoto">Change Photo</button>
-                <div>
-                    <p>Emmanuel Mohammed</p>
-                    <p>08123498765</p>
-                    <p>mohammed.emma@example.com</p>
-                </div>
-            </aside>
-
-            <section id="profile-conntent">
+            <section class="profile-content">
                 <nav>
                     <ul>
                         <li><a href="create-account.html">Create Account</a></li>
                         <li><a href="transaction.html">Transaction History</a></li>
                         <li><a href="index.html">Log Out</a></li>
                     </ul>
-                </nav>
-                <div id="acctOverview">
-                    <div id="acctBalance">
+                </nav>    
+            </section>
+            
+            <section class="profile">
+            <aside>
+                    <div class="profilePhoto"></div>
+                    <button class="updatePhoto" id="updatePhoto">Change Photo</button>
+                    <div>
+                        <p>Emmanuel Mohammed</p>
+                        <p>08123498765</p>
+                        <p>mohammed.emma@example.com</p>
+                    </div>
+            </aside>
+
+            <div class="acctOverview">
+                    <div class="acctBalance" id="acctBalance">
                         <h2>Available Balance</h2>
                         <h4>₦ 150,000.85</h4>
                     </div>
-                    <div id="acctStatus">
+                    <div class="acctStatus" id="acctStatus">
                         <h2>Account Status</h2>
                         <h4>Active</h4>
                     </div>
-                </div>
-            </section>
+                </section>
         </main>
     </div>
+    
+    <footer>Copyright &copy; Banka 2019</footer>
+
 </body>
 </html>
