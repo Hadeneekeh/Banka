@@ -154,7 +154,7 @@ select {
     padding: 10px;
     margin: 10px;
 }
-input[type=button] {
+input[type=button], input[type=submit] {
     background: #acbebe;
     color: #f4f4ef;
     border-radius: 4px;
@@ -166,7 +166,10 @@ input[type=button] {
 input[type=button]:hover {
     background: #a01d26;
 }
-input[type=number], input[type=text] {
+input[type=submit]:hover {
+    background: #a01d26;
+}
+input[type=number], input[type=text], input[type=email] {
     background: #f4f4ef;
     color: #20232a;
     border-radius: 4px;
@@ -218,6 +221,17 @@ tfoot td {
     margin: 10px auto;
     text-align: center;
 }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+.userAcctContainer {
+    width: 80%;
+    text-align: center;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
 
 
 
@@ -278,7 +292,7 @@ tfoot td {
         width: 100px;
         font-size: 8px;
     }
-    input[type=button] {
+    input[type=button], input[type=submit] {
         padding: 5px;
         margin: 5px;
         width: 100px;
@@ -294,6 +308,9 @@ tfoot td {
     }
     .profile {
         flex-flow: column wrap;
+    }
+    .userAcctContainer {
+        width: 100%;
     }
     
 
