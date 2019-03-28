@@ -166,7 +166,7 @@ input[type=button] {
 input[type=button]:hover {
     background: #a01d26;
 }
-input[type=number] {
+input[type=number], input[type=text] {
     background: #f4f4ef;
     color: #20232a;
     border-radius: 4px;
@@ -215,7 +215,7 @@ tfoot td {
 .drAndCrContainer {
     width: 80%;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    margin: 15px auto;
+    margin: 10px auto;
     text-align: center;
 }
 
