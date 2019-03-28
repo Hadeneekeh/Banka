@@ -116,7 +116,7 @@ aside p {
 h4 {
     color: #f4f4ef;
 }
-.overview h2 {
+.overview p {
     color: #20232a;
     background: #a01d2657;
     margin-top: 0;
@@ -124,13 +124,15 @@ h4 {
 .overview {
     display: flex;
     flex-flow: column wrap;
-    /* align-self: center; */
-    /* justify-content: space-between; */
     margin: 0 5px;
     text-align: left;
 }
 #acctOption {
-    width: 50%;
+    width: 100%;
+    /* align-self: flex-start; */
+}
+#overviewHeading {
+    align-self: flex-start;
 }
 .modal {
     display: none;
@@ -147,21 +149,21 @@ h4 {
 select {
     background: #20232a;
     color: #f4f4ef;
-    border-radius: 4px;
+    border-radius: 8px;
     width: 50%;
     padding: 10px;
     margin: 10px;
 }
-input [type=button] {
+input[type=button] {
     background: #acbebe;
     color: #f4f4ef;
     border-radius: 4px;
     width: 50%;
     padding: 10px;
     margin: 10px;
-    /* box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
-input [type=button]:hover {
+input[type=button]:hover {
     background: #a01d26;
 }
 
@@ -198,7 +200,7 @@ input [type=button]:hover {
         border-bottom: 1px solid rgba(0,0,0,0.1); 
       }
       aside {
-          width: 100%;
+        width: 100%;
       }
       /* .acctStatus,
       .acctBalance {
@@ -206,10 +208,29 @@ input [type=button]:hover {
            margin: 10px;
       } */
       .acctOverview {
-            flex-direction: row;
-            margin: 10px;
-            justify-content: space-evenly;
+        flex-direction: row;
+        margin: 10px;
+        justify-content: space-evenly;
       }
-      
+      .overview {
+        flex-direction: column;
+        margin: 10px;
+        /* justify-content: space-evenly; */
+      }
+      #acctOption {
+        align-self: flex-start;
+      }
+      select {
+        padding: 5px;
+        margin: 5px;
+        width: 100px;
+        font-size: 8px;
+      }
+      input[type=button] {
+        padding: 5px;
+        margin: 5px;
+        width: 100px;
+        font-size: 8px;
+      }
 
 }
