@@ -169,7 +169,7 @@ input[type=button]:hover {
 input[type=submit]:hover {
     background: #a01d26;
 }
-input[type=number], input[type=text], input[type=email] {
+input[type=number], input[type=text], input[type=email], input[type=search] {
     background: #f4f4ef;
     color: #20232a;
     border-radius: 4px;
@@ -246,7 +246,13 @@ td button {
     overflow: auto;
     flex-flow: row wrap;
 }
-
+#search {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+    background: #acbebe;
+    color: #f4f4ef;
+}
 
 
 
