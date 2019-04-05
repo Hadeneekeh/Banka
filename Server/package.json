@@ -1,0 +1,40 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A light weight banking app, Banka.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hadeneekeh/Banka.git"
+  },
+  "keywords": [
+    "Banking"
+  ],
+  "author": "Kafilat Abdulwahab",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hadeneekeh/Banka/issues"
+  },
+  "homepage": "https://github.com/Hadeneekeh/Banka#readme",
+  "dependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.4.3",
+    "babel-cli": "^6.26.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0",
+    "mocha": "^6.0.2",
+    "nodemon": "^1.18.10"
+  }
+}
