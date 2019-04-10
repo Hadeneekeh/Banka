@@ -4,8 +4,8 @@
   "description": "A light weight banking app, Banka.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon --exec babel-node ./index.js",
+    "test": "mocha server/test/test.js --require @babel/register --exit"
   },
   "repository": {
     "type": "git",
@@ -21,13 +21,16 @@
   },
   "homepage": "https://github.com/Hadeneekeh/Banka#readme",
   "dependencies": {
+    "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
+    "@babel/register": "^7.4.0",
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
     "eslint": "^5.16.0",
