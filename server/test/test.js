@@ -1,42 +1,40 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../../index';
-import { it } from 'mocha';
 
+chai.should();
 chai.use(chaiHttp);
-
 
 // const testUserSignUp = ;
 
-const signUpUrl = '/v1/auth/signup'; 
-const signInUrl = '/v1/auth/signin'; 
+const signUpUrl = '/api/v1/auth/signup'; 
+const signInUrl = '/api/v1/auth/signin'; 
 
 
 describe('Test for User signUp controller', () => {
-    it('should register a new user when all the details are provided', () => {
+    it('should register a new user when all the details are provided', (done) => {
         chai.request(app)
         .post(signUpUrl)
         .send({
             firstName: 'Mat',
             lastName: 'Eniola',
-            email: 'm.eny@banka.com',
+            email: 'test@banka.com',
             password: 'password'
         })
         .end((err, res) => {
-            expect(res).to.have.status(201);
-            expect(res.body).to.be.an('object');
             expect(res.body.status).to.equal(201);
-            expect(res.body.data).to.be.an('object');
+            expect(res.body.data).to.be.a('object');
             expect(res.body.data).to.have.property('token');
             expect(res.body.data).to.have.property('id');
             expect(res.body.data).to.have.property('firstName');
             expect(res.body.data).to.have.property('lastName');
             expect(res.body.data).to.have.property('email');
             expect(res.body.data.token).to.be.a('string');
+            done();
         });
     });
 
-    it('should not register a user when an existing email is used', () => {
+    it('should not register a user when an existing email is used', (done) => {
         chai.request(app)
         .post(signUpUrl)
         .send({
@@ -46,17 +44,16 @@ describe('Test for User signUp controller', () => {
             password: 'password'
         })
         .end((err, res) =>{
-            expect(res).to.have.status(400);
-            expect(res.body).to.be.an('object');
-            expect(res.body.status).to.equal(400);
-            expect(res.body).to.have.property('error');
-            expect(res.body.error).to.be.a('string');
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
         });
     });
 });
 
 describe('Test for User signIn controller', () => {
-    it('should sign in a user when the correct detail is provided', () => {
+    it('should sign in a user when the correct detail is provided', (done) => {
         chai.request(app)
         .post(signInUrl)
         .send({
@@ -65,19 +62,20 @@ describe('Test for User signIn controller', () => {
         })
         .end((err, res) => {
             expect(res).to.have.status(202);
-            expect(res.body).to.be.an('object');
+            expect(res.body).to.be.a('object');
             expect(res.body.status).to.equal(202);
-            expect(res.body.data).to.be.an('object');
+            expect(res.body.data).to.be.a('object');
             expect(res.body.data).to.have.property('token');
             expect(res.body.data).to.have.property('id');
             expect(res.body.data).to.have.property('firstName');
             expect(res.body.data).to.have.property('lastName');
             expect(res.body.data).to.have.property('email');
             expect(res.body.data.token).to.be.a('string');
+            done();
         });
     });
 
-    it('should not sign in a user when password is incorrect', () => {
+    it('should not sign in a user when password is incorrect', (done) => {
         chai.request(app)
         .post(signInUrl)
         .send({
@@ -86,14 +84,14 @@ describe('Test for User signIn controller', () => {
         })
         .end((err, res) => {
             expect(res).to.have.status(401);
-            expect(res.body).to.be.an('object');
+            expect(res.body).to.be.a('object');
             expect(res.body.status).to.equal(401);
-            expect(res.body.data).to.have.property('error');
-            expect(res.body.data.error).to.be.a('Unauthorized. Password is incorrect');
+            expect(res.body).to.have.property('error');
+            done();
         });
     });
 
-    it('should not sign in a user when email is incorrect', () => {
+    it('should not sign in a user when email is incorrect', (done) => {
         chai.request(app)
         .post(signInUrl)
         .send({
@@ -102,10 +100,10 @@ describe('Test for User signIn controller', () => {
         })
         .end((err, res) => {
             expect(res).to.have.status(401);
-            expect(res.body).to.be.an('object');
+            expect(res.body).to.be.a('object');
             expect(res.body.status).to.equal(401);
-            expect(res.body.data).to.have.property('error');
-            expect(res.body.data.error).to.be.a('Unauthorized. Email deos not exist');
+            expect(res.body).to.have.property('error');
+            done();
         });
     });
 });

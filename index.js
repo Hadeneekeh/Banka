@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/', (req, res) => res.send('Server setup is fine'));
-app.use('/v1/auth', userRoute);
+app.use('/api/v1/auth', userRoute);
 
 
 app.listen(port, () => console.log(`Server is running on PORT ${port}`));

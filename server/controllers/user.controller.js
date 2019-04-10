@@ -18,11 +18,9 @@ const Usercontroller = {
         };
         
         const newUser = users.create(userInfo); //creates the user using the method created in the model
-
         const token = Helper.generateToken(newUser); //generates token
 
         //the response expected
-
         return res.status(201).json({
             status: res.statusCode,
             data: {
@@ -35,6 +33,7 @@ const Usercontroller = {
         }
         
         );
+        
     },
 
     signIn(req, res) {
