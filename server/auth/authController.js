@@ -8,6 +8,9 @@ const Helper = {
         return bcrypt.hashSync(password, salt);
       },
 
+    comparePassword(password, hashPassword) {
+        return bcrypt.compareSync(password, hashPassword);
+      }, 
    
     generateToken(payload) {
         const token = jwt.sign(
@@ -15,7 +18,10 @@ const Helper = {
         return token;
       },
 
-    
+    verifyToken(token) {
+        const decoded = jwt.verify(token, config.secret);
+        return decoded;
+      }
     
 }
 

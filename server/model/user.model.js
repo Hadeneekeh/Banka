@@ -15,6 +15,16 @@ const User = {
     return user;
   },
 
+  login(userInfo) {
+    const user = {
+      id: userInfo.id,
+      firstName: userInfo.firstName,
+      lastName: userInfo.lastName,
+      email: userInfo.email,
+    };
+
+    return user;
+  }
 }
 
 export default User;
