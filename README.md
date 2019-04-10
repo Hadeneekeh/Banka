@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/Hadeneekeh/Banka.svg?branch=develop)](https://travis-ci.org/Hadeneekeh/Banka)
 # Banka
 Banka is a light-weight core banking application that powers banking operations like account
 creation, customer deposit and withdrawals. With this app, users can signup and create bank accounts online, but must visit the branch to withdraw or deposit money.
