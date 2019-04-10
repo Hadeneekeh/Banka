@@ -58,7 +58,7 @@ const Usercontroller = {
         }
         const user = users.login(registeredUser);
 
-        const token = Helper.generateToken(user);
+        const token = Helper.generateToken(registeredUser);
         
        return res.status(202).json({
             status: res.statusCode,
