@@ -1,4 +1,5 @@
 import accounts from '../model/account.model';
+import dummyAccount from '../utils/dummyAccount';
 
 
 const AccountController = {
@@ -19,6 +20,24 @@ const AccountController = {
             openingBalance: accountDetails.balance
             }
         });
+    },
+
+    updateAccountStatus(req, res) {
+        const { status } = req.body;
+        const { accountNumber } = req.params;
+
+        const validAccount = dummyAccount.find(anAccount => anAccount.accountNumber === parseInt(accountNumber, 10));
+
+        if(validAccount) {
+            return res.status(200).json({
+                status: res.statusCode,
+                data: {
+                    accountNumber: accountNumber, 
+                    status: status,
+                }
+            });
+        };
+
     }
 }
 

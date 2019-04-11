@@ -162,9 +162,9 @@ describe('Test for update account status', () => {
             status: 'Dormat',
         })
         .end((err, res) => {
-            expect(res).to.have.status(201);
+            expect(res).to.have.status(200);
             expect(res.body).to.be.a('object');
-            expect(res.body.status).to.equal(201);
+            expect(res.body.status).to.equal(200);
             expect(res.body).to.have.property('data');
             expect(res.body.data).to.be.a('object');
             done();
