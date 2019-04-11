@@ -172,3 +172,29 @@ describe('Test for update account status', () => {
     });
     });
     });
+
+    describe('Test for Delete an account', () => {
+        it('should delete an account', (done) => {
+            chai.request(app)
+        .post(signInUrl)
+        .send({
+            email: 'g.ade@banka.com',
+            password: 'password',
+        })
+        .end((loginErr, loginRes) => {
+            const token = `Bearer ${loginRes.body.data.token}`;
+        
+        chai.request(app)
+        .delete(accountUpdateUrl)
+        .set('Authorization', token)
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(200);
+            expect(res.body).to.have.property('message');
+            expect(res.body.message).to.equal('Account deleted successfully');
+            done();
+        });
+    });
+    });
+    });
