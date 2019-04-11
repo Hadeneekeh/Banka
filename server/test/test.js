@@ -9,7 +9,9 @@ chai.use(chaiHttp);
 
 const signUpUrl = '/api/v1/auth/signup'; 
 const signInUrl = '/api/v1/auth/signin'; 
-const accountUrl = '/api/v1/account'
+const accountUrl = '/api/v1/account';
+const accountUpdateUrl = '/api/v1/account/8335248559'
+
 
 
 describe('Test for User signUp controller', () => {
@@ -139,3 +141,34 @@ describe('Test for create bank account', () => {
     });
     });
 });
+
+
+describe('Test for update account status', () => {
+    it('should update an account', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+            email: 'g.ade@banka.com',
+            password: 'password',
+        })
+        .end((loginErr, loginRes) => {
+            const token = `Bearer ${loginRes.body.data.token}`;
+        
+
+        chai.request(app)
+        .patch(accountUpdateUrl)
+        .set('Authorization', token)
+        .send({
+            status: 'Dormat',
+        })
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(200);
+            expect(res.body).to.have.property('data');
+            expect(res.body.data).to.be.a('object');
+            done();
+        });
+    });
+    });
+    });
