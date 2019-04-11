@@ -38,6 +38,19 @@ const AccountController = {
             });
         };
 
+    },
+
+    deleteAccount(req, res) {
+        const { accountNumber } = req.params;
+
+        const accountIndex = dummyAccount.findIndex(anAccount => anAccount.accountNumber === parseInt(accountNumber, 10))
+        
+        dummyAccount.splice(accountIndex, 1)
+        
+        return res.status(200).json({
+            status: res.statusCode,
+            message: 'Account deleted successfully'
+        });
     }
 }
 

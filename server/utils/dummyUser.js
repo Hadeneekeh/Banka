@@ -8,7 +8,7 @@ const users = [
       email: 'm.eny@banka.com',
       password: Helper.hashPassword('password'),
       type: 'staff',
-      isAdmin: 'true',
+      isAdmin: true,
     },
     {
       id: 2,
@@ -17,7 +17,7 @@ const users = [
       email: 'g.ade@banka.com',
       password: Helper.hashPassword('password'),
       type: 'staff',
-      isAdmin: 'false',
+      isAdmin: false,
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const users = [
       email: 'f.amaka@example.com',
       password: Helper.hashPassword('password'),
       type: 'client',
-      isAdmin: 'false',
+      isAdmin: false,
     },
   ]
 

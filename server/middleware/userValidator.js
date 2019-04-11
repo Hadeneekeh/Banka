@@ -26,6 +26,23 @@ const Verification = {
         };
 
         return next();
+    },
+
+    checkAdmin(req, res, next) {
+        const token = req.headers.authorization.split(' ')[1];
+        const decode = usersVerification.verifyToken(token);
+
+        req.user = decode;
+
+        if(!req.user.isAdmin) {
+        return res.status(403).send({
+            status: res.statusCode,
+            error: 'Unauthorized'
+        });
+    }
+        
+        return next();
+        
     }
 }
 
