@@ -3,6 +3,7 @@ import bodyParser from 'body-parser';
 
 import userRoute from './server/routes/user.route';
 import accountRoute from './server/routes/account.route';
+import transactionRoute from './server/routes/transaction.route';
 
 
 const app = express();
@@ -13,9 +14,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
-app.get('/', (req, res) => res.send('Server setup is fine'));
+app.get('/', (req, res) => res.send('Welcome to Banka'));
 app.use('/api/v1/auth', userRoute);
 app.use('/api/v1/account', accountRoute);
+app.use('/api/v1/transactions', transactionRoute);
 
 
 
