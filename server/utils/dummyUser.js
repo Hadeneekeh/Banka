@@ -9,6 +9,7 @@ const users = [
       password: Helper.hashPassword('password'),
       type: 'staff',
       isAdmin: true,
+      isCashier: false,
     },
     {
       id: 2,
@@ -18,6 +19,7 @@ const users = [
       password: Helper.hashPassword('password'),
       type: 'staff',
       isAdmin: false,
+      isCashier: true,
     },
     {
       id: 3,
