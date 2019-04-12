@@ -9,8 +9,9 @@ chai.use(chaiHttp);
 const signUpUrl = '/api/v1/auth/signup'; 
 const signInUrl = '/api/v1/auth/signin'; 
 const accountUrl = '/api/v1/account';
-const accountUpdateUrl = '/api/v1/account/8335248559'
-const accountDebitUrl = '/api/v1/transactions/3372265130/debit'
+const accountUpdateUrl = '/api/v1/account/8335248559';
+const accountDebitUrl = '/api/v1/transactions/3372265130/debit';
+const accountCreditUrl = '/api/v1/transactions/3372265130/credit';
 
 
 describe('Test for User signUp controller', () => {
@@ -236,6 +237,40 @@ describe('Test for the endpoint to debit an account', () => {
             
             chai.request(app)
             .post(accountDebitUrl)
+            .set('Authorization', token)
+            .send({
+                amount: 2000
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.be.a('object');
+                expect(res.body.data).to.have.property('transactionId');                
+                expect(res.body.data).to.have.property('transactionType');
+                expect(res.body.data).to.have.property('accountNumber');
+                expect(res.body.data).to.have.property('amount');
+                expect(res.body.data).to.have.property('cashier');
+                expect(res.body.data).to.have.property('accountBalance');
+                done();
+            });
+        });
+    });
+});
+
+describe('Test for the endpoint to credit an account', () => {
+    it('should credit an account when the login user is authorized', (done) => {
+            chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'g.ade@banka.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .post(accountCreditUrl)
             .set('Authorization', token)
             .send({
                 amount: 2000
