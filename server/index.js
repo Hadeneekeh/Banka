@@ -1,9 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import userRoute from './server/routes/user.route';
-import accountRoute from './server/routes/account.route';
-import transactionRoute from './server/routes/transaction.route';
+import userRoute from './routes/user.route';
+import accountRoute from './routes/account.route';
+import transactionRoute from './routes/transaction.route';
 
 
 const app = express();

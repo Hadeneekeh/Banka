@@ -4,8 +4,11 @@
   "description": "A light weight banking app, Banka.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node ./index.js",
-    "test": "mocha server/test/test.js --require @babel/register --exit"
+    "start": "node build/index.js",
+    "dev": "nodemon --exec babel-node server/index.js",
+    "test": "mocha server/test/test.js --require @babel/register --exit",
+    "build": "rm -rf build && mkdir build && babel -d ./build ./server",
+    "heroku-postbuild": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,7 @@
     "jsonwebtoken": "^8.5.1"
   },
   "devDependencies": {
+    "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.3",
