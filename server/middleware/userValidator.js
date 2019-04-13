@@ -19,7 +19,7 @@ const Verification = {
         req.user = decode;
 
         if(req.user.type !== 'staff') {
-            return res.status(403).send({
+            return res.status(401).send({
                 status: res.statusCode,
                 error: 'Unauthorized'
             });
@@ -35,7 +35,7 @@ const Verification = {
         req.user = decode;
 
         if(!req.user.isAdmin) {
-        return res.status(403).send({
+        return res.status(401).send({
             status: res.statusCode,
             error: 'Unauthorized'
         });
@@ -52,7 +52,7 @@ const Verification = {
         req.user = decode;
 
         if(!req.user.isCashier) {
-        return res.status(403).json({
+        return res.status(401).json({
             status: res.statusCode,
             error: 'Unauthorized'
         });

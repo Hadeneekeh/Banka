@@ -25,7 +25,7 @@ describe('Test for User signUp controller', () => {
             password: 'password'
         })
         .end((err, res) => {
-            expect(res.body.status).to.equal(201);
+            expect(res.body.status).to.equal(200);
             expect(res.body.data).to.be.a('object');
             expect(res.body.data).to.have.property('token');
             expect(res.body.data).to.have.property('id');
@@ -64,9 +64,9 @@ describe('Test for User signIn controller', () => {
             password: 'password'
         })
         .end((err, res) => {
-            expect(res).to.have.status(202);
+            expect(res).to.have.status(200);
             expect(res.body).to.be.a('object');
-            expect(res.body.status).to.equal(202);
+            expect(res.body.status).to.equal(200);
             expect(res.body.data).to.be.a('object');
             expect(res.body.data).to.have.property('token');
             expect(res.body.data).to.have.property('id');
@@ -131,9 +131,9 @@ describe('Test for create bank account', () => {
             openingBalance: 10000.00,
         })
         .end((err, res) => {
-            expect(res).to.have.status(201);
+            expect(res).to.have.status(200);
             expect(res.body).to.be.a('object');
-            expect(res.body.status).to.equal(201);
+            expect(res.body.status).to.equal(200);
             expect(res.body).to.have.property('data');
             expect(res.body.data).to.be.a('object');
             done();
@@ -212,9 +212,9 @@ describe('Test for update account status', () => {
         .delete(accountUpdateUrl)
         .set('Authorization', token)
         .end((err, res) => {
-            expect(res).to.have.status(403);
+            expect(res).to.have.status(401);
             expect(res.body).to.be.a('object');
-            expect(res.body.status).to.equal(403);
+            expect(res.body.status).to.equal(401);
             expect(res.body).to.have.property('error');
             expect(res.body.error).to.equal('Unauthorized');
             done();

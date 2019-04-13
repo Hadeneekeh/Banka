@@ -9,7 +9,7 @@ const AccountController = {
         const accountDetails = {...req.body};
         accounts.create(accountDetails, req);
 
-        return res.status(201).json({
+        return res.status(200).json({
             status : res.statusCode ,
             data: {
             accountNumber : Math.floor(Math.random() * 9000000000) + 1000000000,

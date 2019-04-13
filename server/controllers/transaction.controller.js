@@ -11,20 +11,19 @@ const transactionController = {
         
 
         if(!registeredAccount) {
-            return res.status(403).json({
+            return res.status(400).json({
                 status: res.statusCode,
                 error: "Incorrect account number"
             });
         };
         if(registeredAccount.balance < amount) {
-            console.log(registeredAccount.balance);
-            return res.status(403).json({
+            return res.status(400).json({
                 status: res.statusCode,
                 error: "Insufficient balance"
             });
         };
 
-                const transaction = Transact.debitAccount(registeredAccount, req);
+        const transaction = Transact.debitAccount(registeredAccount, req);
 
 
         return res.status(200).json({
@@ -49,13 +48,13 @@ const transactionController = {
         
 
         if(!registeredAccount) {
-            return res.status(403).json({
+            return res.status(400).json({
                 status: res.statusCode,
                 error: "Incorrect account number"
             });
         };
         if(registeredAccount.balance < amount) {
-            return res.status(403).json({
+            return res.status(400).json({
                 status: res.statusCode,
                 error: "Insufficient balance"
             });
