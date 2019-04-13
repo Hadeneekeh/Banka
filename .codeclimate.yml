@@ -28,7 +28,7 @@ checks:
       threshold: 4
 exclude_patterns:
   - node_modules/
-  - server/tests/
+  - server/test/
   - server/index/
   - server/public/
   - dist/
