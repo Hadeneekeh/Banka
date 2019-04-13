@@ -21,7 +21,7 @@ const Usercontroller = {
         const token = Helper.generateToken(newUser); //generates token
 
         //the response expected
-        return res.status(201).json({
+        return res.status(200).json({
             status: res.statusCode,
             data: {
                 token,
@@ -60,7 +60,7 @@ const Usercontroller = {
 
         const token = Helper.generateToken(registeredUser);
         
-       return res.status(202).json({
+       return res.status(200).json({
             status: res.statusCode,
             data: {
                 token,
