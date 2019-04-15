@@ -1,8 +1,8 @@
 body {
-    font-family: Tahoma;
+    font-family: 'Great Vibes', Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url(img3.jpg);
+    background-image: url(../img/img3.jpg);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -17,7 +17,7 @@ body {
     margin-right: 2px;
 }
 header {
-    color: #a01d26;
+    color: #f4f4ef;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -47,7 +47,8 @@ header #brand-name {
 }
 header #brand-name h1 {
     margin: 0;
-    font-size: 40px;
+    font: 200 35px/0.4 'Great Vibes', Helvetica, sans-serif;
+    text-shadow: 4px 4px 3px rgba(243, 11, 11, 0.898); 
 }
 header nav {
     align-self: flex-end;
@@ -67,6 +68,12 @@ header nav {
     margin: 70px;
     background: #f4f4ef;
     float: left;
+}
+input[type=tel] {
+    width: 45%;
+    padding: 10px;
+    margin: 5px 5px 10px 0;
+    display: inline-block;
 }
 input[type=text], input[type=password], input[type=email], input[type=button] {
     width: 90%;
