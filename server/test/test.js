@@ -8,8 +8,8 @@ chai.use(chaiHttp);
 
 const signUpUrl = '/api/v1/auth/signup'; 
 const signInUrl = '/api/v1/auth/signin'; 
-const accountUrl = '/api/v1/account';
-const accountUpdateUrl = '/api/v1/account/8335248559';
+const accountUrl = '/api/v1/accounts';
+const accountUpdateUrl = '/api/v1/accounts/8335248559';
 const accountDebitUrl = '/api/v1/transactions/3372265130/debit';
 const accountCreditUrl = '/api/v1/transactions/3372265130/credit';
 

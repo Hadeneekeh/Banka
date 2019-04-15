@@ -51,7 +51,7 @@ const Verification = {
 
         req.user = decode;
 
-        if(!req.user.isCashier) {
+        if(req.user.isCashier === false) {
         return res.status(401).json({
             status: res.statusCode,
             error: 'Unauthorized'
