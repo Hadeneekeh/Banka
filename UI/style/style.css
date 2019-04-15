@@ -1,8 +1,8 @@
 body {
-    font-family: Tahoma;
+    font-family: 'Great Vibes', Helvetica, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url(img3.jpg);
+    background-image: url(../img/img3.jpg);
     background-position: center;
     background-repeat: no-repeat;
 }
@@ -17,7 +17,7 @@ body {
     margin-right: 2px;
 }
 header {
-    color: #a01d26;
+    color: #f4f4ef;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -47,7 +47,8 @@ header #brand-name {
 }
 header #brand-name h1 {
     margin: 0;
-    font-size: 40px;
+    font: 200 35px/0.4 'Great Vibes', Helvetica, sans-serif;
+    text-shadow: 4px 4px 3px rgba(243, 11, 11, 0.898); 
 }
 header nav {
     align-self: flex-end;
@@ -68,20 +69,26 @@ header nav {
     background: #f4f4ef;
     float: left;
 }
-input[type=text], input[type=password], input[type=email], input[type=button] {
+input[type=tel] {
+    width: 45%;
+    padding: 10px;
+    margin: 5px 5px 10px 0;
+    display: inline-block;
+}
+input[type=text], input[type=password], input[type=email] {
     width: 90%;
     padding: 10px;
     margin: 5px 5px 10px 0;
     display: inline-block;
 }
-input[type=submit], input[type=button] {
+input[type=button], input[type=submit] {
     width: 50%;
     padding: 10px;
     margin: 5px 5px 10px 0;
     display: inline-block;
     background: #acbebe;
 }
-input[type=submit], input[type=button]:hover {
+input[type=submit]:hover, input[type=button]:hover {
     color: #f4f4ef;
     background-color: #a01d26;
 }
@@ -102,7 +109,8 @@ footer {
     text-align: center;
     background: #a01d26;
     color: #f4f4ef;
-    margin-top: 10px;
+    margin-top: 200px;
+    margin-bottom: 0;
     padding: 5px;
 }
 #signUpForm-container {
@@ -110,13 +118,16 @@ footer {
     flex-direction: column;  
 }
 #signUp-form {
-    width: 50%;
-    padding: 0 10px 0 10px;
+    width: 30%;
+    padding: 0 5px 0 20px;
     margin: 0 5px 5px 5px;
-    background: #20232a;
-    opacity: 0.8;
+    background: #f4f4ef;
+    opacity: 0.9;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.h3 {
+    color: #20232a;
 }
 #pswReset-container {
     display: flex;
@@ -126,8 +137,8 @@ footer {
     width: 50%;
     padding: 0 10px 0 10px;
     margin: 0 5px 5px 5px;
-    background: #20232a;
-    opacity: 0.8;
+    background: #f4f4ef;
+    opacity: 0.9;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
@@ -168,5 +179,9 @@ footer {
         flex-direction: column;
         margin-top: 40px;
     }
-
+    #signUp-form {
+        width: 50%;
+        padding: 0 5px 0 10px;
+        margin: 0 5px 5px 15px;
+    }
 }
