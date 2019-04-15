@@ -16,7 +16,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => res.send('Welcome to Banka'));
 app.use('/api/v1/auth', userRoute);
-app.use('/api/v1/account', accountRoute);
+app.use('/api/v1/accounts', accountRoute);
 app.use('/api/v1/transactions', transactionRoute);
 
 

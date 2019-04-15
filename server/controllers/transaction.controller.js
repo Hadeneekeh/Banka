@@ -1,37 +1,31 @@
 import Transact from '../model/transaction.model';
-import dummyAccount from '../utils/dummyAccount';
 
 
 const transactionController = {
     debit(req, res) {
-        const accountNumber = req.params.accountNumber;
-        const amount = parseInt(req.body.amount);
+        const transaction = Transact.accountStatus(req, 'debit');
 
-        const registeredAccount = dummyAccount.find(anAccount => anAccount.accountNumber === parseInt(accountNumber, 10));
-        
 
-        if(!registeredAccount) {
+        if(transaction === "Incorrect account number") {
             return res.status(400).json({
                 status: res.statusCode,
                 error: "Incorrect account number"
             });
         };
-        if(registeredAccount.balance < amount) {
+        if(transaction === "Insufficient balance") {
             return res.status(400).json({
                 status: res.statusCode,
                 error: "Insufficient balance"
             });
         };
 
-        const transaction = Transact.debitAccount(registeredAccount, req);
-
 
         return res.status(200).json({
             status: res.statusCode,
             data: {
                 transactionId: transaction.id,
-                accountNumber: registeredAccount.accountNumber,
-                amount: amount,
+                accountNumber: req.params.accountNumber,
+                amount: req.body.amount,
                 cashier: req.user.id,
                 transactionType: transaction.type,
                 accountBalance: transaction.newBalance,
@@ -41,34 +35,22 @@ const transactionController = {
     },
 
     credit(req, res) {
-        const accountNumber = req.params.accountNumber;
-        const amount = parseInt(req.body.amount);
-
-        const registeredAccount = dummyAccount.find(anAccount => anAccount.accountNumber === parseInt(accountNumber, 10));
         
+        const transaction = Transact.accountStatus(req, 'credit');
 
-        if(!registeredAccount) {
+        if(transaction === "Incorrect account number") {
             return res.status(400).json({
                 status: res.statusCode,
                 error: "Incorrect account number"
             });
         };
-        if(registeredAccount.balance < amount) {
-            return res.status(400).json({
-                status: res.statusCode,
-                error: "Insufficient balance"
-            });
-        };
-
-        const transaction = Transact.creditAccount(registeredAccount, req);
-
-
+        
         return res.status(200).json({
             status: res.statusCode,
             data: {
                 transactionId: transaction.id,
-                accountNumber: registeredAccount.accountNumber,
-                amount: amount,
+                accountNumber: req.params.accountNumber,
+                amount: req.body.amount,
                 cashier: req.user.id,
                 transactionType: transaction.type,
                 accountBalance: transaction.newBalance,

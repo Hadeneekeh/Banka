@@ -56,7 +56,7 @@ const Usercontroller = {
                 error: "Unauthorized. Email deos not exist",
             });
         }
-        const user = users.login(registeredUser);
+        const returningUser = users.login(registeredUser);
 
         const token = Helper.generateToken(registeredUser);
         
@@ -64,10 +64,10 @@ const Usercontroller = {
             status: res.statusCode,
             data: {
                 token,
-                id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
+                id: returningUser.id,
+                firstName: returningUser.firstName,
+                lastName: returningUser.lastName,
+                email: returningUser.email,
             }
         });
     }
