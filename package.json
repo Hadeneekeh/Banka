@@ -6,13 +6,14 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "nodemon --exec babel-node server/index.js",
-    "test": "npm run drop && npm run create && nyc mocha server/test/test.js --require @babel/register --exit",
+    "test": "cross-env NODE_ENV=test && npm run migrate && nyc mocha server/test/test.js --require @babel/register --exit",
     "build": "rm -rf build && mkdir build && babel -d ./build ./server",
     "heroku-postbuild": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "create": "cross-env NODE_ENV=development babel-node server/usingDB/migration/createTable.js",
-    "drop": "cross-env NODE_ENV=development babel-node server/usingDB/migration/dropTable.js"
+    "create": "babel-node server/usingDB/migration/createTable.js",
+    "drop": "babel-node server/usingDB/migration/dropTable.js",
+    "migrate": "npm run drop && npm run create"
   },
   "repository": {
     "type": "git",
