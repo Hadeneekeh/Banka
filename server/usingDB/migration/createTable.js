@@ -2,12 +2,13 @@ import pool from '../../db';
 
 const usersTable = `CREATE TABLE IF NOT EXISTS users(
     id serial PRIMARY KEY,
-    firstname text NOT NULL,
-    lastname text NOT NULL,
-    email text NOT NULL,
+    firstName text NOT NULL,
+    lastName text NOT NULL,
+    email text UNIQUE NOT NULL,
     hashpassword text NOT NULL,
-    type text NOT NULL,
-    isadmin text NOT NULL
+    type text DEFAULT 'user',
+    isAdmin BOOLEAN DEFAULT FALSE,
+    registeredOn TIMESTAMP
     )`;
 
 

@@ -1,9 +1,13 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
+
+
 import userRoute from './routes/user.route';
 import accountRoute from './routes/account.route';
 import transactionRoute from './routes/transaction.route';
+
+import userWithDb from './usingDB/route/userRouteWithDB';
 
 
 const app = express();
@@ -15,9 +19,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/', (req, res) => res.send('Welcome to Banka'));
-app.use('/api/v1/auth', userRoute);
+//app.use('/api/v1/auth', userRoute);
 app.use('/api/v1/accounts', accountRoute);
 app.use('/api/v1/transactions', transactionRoute);
+
+app.use('/api/v1/auth', userWithDb);
 
 
 
