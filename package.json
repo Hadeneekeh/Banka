@@ -10,7 +10,8 @@
     "build": "rm -rf build && mkdir build && babel -d ./build ./server",
     "heroku-postbuild": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test"
+    "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
+    "create": "cross-env NODE_ENV=development babel-node server/usingDB/migration/createTable.js"
   },
   "repository": {
     "type": "git",
@@ -28,8 +29,11 @@
   "dependencies": {
     "bcrypt": "^3.0.5",
     "body-parser": "^1.18.3",
+    "cross-env": "^5.2.0",
+    "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "jsonwebtoken": "^8.5.1"
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.9.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
@@ -43,7 +47,7 @@
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.16.0",
-    "mocha": "^6.0.2",
+    "mocha": "^6.1.3",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.10",
     "nyc": "^13.3.0"
