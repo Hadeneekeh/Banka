@@ -1,6 +1,6 @@
 import helper from '../auth/auth';
 import db from '../../db';
-import { STATUS_CODES } from 'http';
+import createUserQuery from '../migration/queries';
 
 const User = {
     async signupUser(req, res) {
@@ -8,9 +8,6 @@ const User = {
 
         const hashPassword = helper.hashPassword(req.body.password);
 
-        const createUserQuery = `INSERT INTO users(firstName, lastName, email, hashpassword)
-        VALUES($1, $2, $3, $4)
-        RETURNING id, firstname, lastname, email, type, isadmin, registeredon`;
 
         const values = [
             req.body.firstName,
@@ -20,7 +17,7 @@ const User = {
         ];
 
         try {
-            const { rows } = await db.query(createUserQuery, values);
+            const { rows } = await db.query(createUserQuery.users.createUser, values);
             const token = await helper.generateToken({id: rows[0].id, email: rows[0].email, isAdmin: rows[0].isadmin, type: rows[0].type})
             return res.status(201).json(
             {
