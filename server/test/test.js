@@ -55,61 +55,61 @@ describe('Test for User signUp controller', () => {
     });
 });
 
-// describe('Test for User signIn controller', () => {
-//     it('should sign in a user when the correct detail is provided', (done) => {
-//         chai.request(app)
-//         .post(signInUrl)
-//         .send({
-//             email: 'm.eny@banka.com',
-//             password: 'password'
-//         })
-//         .end((err, res) => {
-//             expect(res).to.have.status(200);
-//             expect(res.body).to.be.a('object');
-//             expect(res.body.status).to.equal(200);
-//             expect(res.body.data).to.be.a('object');
-//             expect(res.body.data).to.have.property('token');
-//             expect(res.body.data).to.have.property('id');
-//             expect(res.body.data).to.have.property('firstName');
-//             expect(res.body.data).to.have.property('lastName');
-//             expect(res.body.data).to.have.property('email');
-//             expect(res.body.data.token).to.be.a('string');
-//             done();
-//         });
-//     });
+describe('Test for User signIn controller', () => {
+    it('should sign in a user when the correct detail is provided', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+            email: 'test@banka.com',
+            password: 'password'
+        })
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(200);
+            expect(res.body.data).to.be.a('object');
+            expect(res.body.data).to.have.property('token');
+            expect(res.body.data).to.have.property('id');
+            expect(res.body.data).to.have.property('firstName');
+            expect(res.body.data).to.have.property('lastName');
+            expect(res.body.data).to.have.property('email');
+            expect(res.body.data.token).to.be.a('string');
+            done();
+        });
+    });
 
-//     it('should not sign in a user when password is incorrect', (done) => {
-//         chai.request(app)
-//         .post(signInUrl)
-//         .send({
-//             email: 'm.eny@banka.com',
-//             password: 'pword'
-//         })
-//         .end((err, res) => {
-//             expect(res).to.have.status(401);
-//             expect(res.body).to.be.a('object');
-//             expect(res.body.status).to.equal(401);
-//             expect(res.body).to.have.property('error');
-//             done();
-//         });
-//     });
+    it('should not sign in a user when password is incorrect', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+            email: 'test@banka.com',
+            password: 'pword'
+        })
+        .end((err, res) => {
+            expect(res).to.have.status(401);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(401);
+            expect(res.body).to.have.property('error');
+            done();
+        });
+    });
 
-//     it('should not sign in a user when email is incorrect', (done) => {
-//         chai.request(app)
-//         .post(signInUrl)
-//         .send({
-//             email: 'm.gbeny@banka.com',
-//             password: 'password'
-//         })
-//         .end((err, res) => {
-//             expect(res).to.have.status(401);
-//             expect(res.body).to.be.a('object');
-//             expect(res.body.status).to.equal(401);
-//             expect(res.body).to.have.property('error');
-//             done();
-//         });
-//     });
-// });
+    it('should not sign in a user when email is incorrect', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+            email: 'testing@banka.com',
+            password: 'password'
+        })
+        .end((err, res) => {
+            expect(res).to.have.status(400);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(400);
+            expect(res.body).to.have.property('error');
+            done();
+        });
+    });
+});
 
 // describe('Test for create bank account', () => {
 //     it('should create an account', (done) => {
