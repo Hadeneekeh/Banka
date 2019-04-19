@@ -1,27 +1,27 @@
 body {
-    font-family: 'Great Vibes', Helvetica, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     margin: 20px;
     margin-bottom: 0;
 }
 footer {
     text-align: center;
-    background: #a01d26;
+    background: #0000ff;
     color: #f4f4ef;
     margin-top: 200px;
     margin-bottom: 0;
     padding: 5px;
 }
 header {
-    color: #a01d26;
+    color: #f4f4ef;
     height: 20vh;
     background: url('../img/img3.jpg');
     background-position: center left;
 }
 header h1 {
-    color: #f4f4ef;
+    color: #0000ff;
     margin: 0;
-    font: 200 35px 'Great Vibes', Helvetica, sans-serif;
-    text-shadow: 4px 4px 3px rgba(243, 11, 11, 0.898); 
+    font: 200 40px 'Great Vibes', Helvetica, sans-serif;
+    text-shadow: 2px 3px 2px rgba(206, 206, 4, 0.279); 
 }
 .profile-content {
     display: flex;
@@ -35,7 +35,7 @@ nav {
     align-self: flex-end;
     justify-content: flex-start;
     margin-top: 0px;
-    background-color: #a01d26;
+    background-color: #0000ff;
     padding: 10px;
     width: 100%;
 }
@@ -52,11 +52,15 @@ nav a {
     color: #f4f4ef;
     text-decoration: none;
     font-size: 18px;
-    background: #a01d26;
+    background: #0000ff;
     padding: 10px;
 }
 nav a:hover {
-    color: #a01d26;
+    color: #0000ff;
+    background: #f4f4ef;
+}
+.active {
+    color: #0000ff;
     background: #f4f4ef;
 }
 .profilePhoto{
@@ -71,8 +75,8 @@ nav a:hover {
 aside {
     width: 250px;
     height: 300px;
-    border: 4px solid #acbebe;
-    background: #acbebe;
+    border: 4px solid #f4f4ef;
+    background: rgba(206, 206, 4, 0.891);
     padding: 10px 10px 10px 15px;
     border-radius: 2px;
     margin-top: 0;
@@ -81,10 +85,10 @@ aside {
 aside button {
     margin-top: 10px;
     padding: 5px;
-    background: #a01d26;
+    background: #0000ff;
     border-radius: 4px;
     color: #f4f4ef;
-    border: #acbebe;
+    border: #0000ff;
 }
 aside p {
     color: #f4f4ef;
@@ -95,27 +99,32 @@ aside p {
 } */
 .acctOverview {
     display: flex;
-    flex-flow: row wrap;
+    /* flex-flow: row wrap; */
     align-self: center;
-    justify-content: space-between;
-    margin: 20px 0 0 60px;
+    justify-content: space-around;
+    margin: 5px 0 0 60px;
     text-align: center;
 }
-.acctStatus {
-    width: 200px;
-    margin: 30px;
-    background: #acbebe;
-    color: #20232a;
+#acct1 {
+    width: 50%;
+    margin: 8px 0 0 60px;
+    padding: 20px;
+    background: rgba(206, 206, 4, 0.891);
+    color: #0000ff;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    /* align-self: flex-start; */
+    align-self: flex-start;
 }
-.acctBalance {
-    width: 200px;
-    margin: 30px;
-    background: #acbebe;
-    color: #20232a;
+#acct2 {
+    width: 50%;
+    margin: 8px 0 0 60px;
+    padding: 20px;
+    background: rgba(206, 206, 4, 0.891);
+    color: #0000ff;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     align-self: flex-end;
+}
+h2 {
+    color: white;
 }
 h4 {
     color: #f4f4ef;
@@ -147,11 +156,11 @@ h4 {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: #373737;
+    background-color: rgba(206, 206, 4, 0.891);
     opacity: 1;
 }
 select {
-    background: #20232a;
+    background: rgba(206, 206, 4, 0.891);
     color: #f4f4ef;
     border-radius: 4px;
     width: 50%;
@@ -160,19 +169,21 @@ select {
    align-self: left;
 }
 input[type=button], input[type=submit] {
-    background: #acbebe;
+    background: #0000ff;
     color: #f4f4ef;
+    font-size: 100%;
     border-radius: 4px;
     width: 25%;
     padding: 10px;
     margin: 10px;
+    cursor: pointer;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 input[type=button]:hover {
-    background: #a01d26;
+    background: rgba(206, 206, 4, 0.891);
 }
 input[type=submit]:hover {
-    background: #a01d26;
+    background: rgba(206, 206, 4, 0.891);
 }
 input[type=number], input[type=text], input[type=email], input[type=search] {
     background: #f4f4ef;
@@ -183,6 +194,7 @@ input[type=number], input[type=text], input[type=email], input[type=search] {
     margin: 10px;
 }
 #transTable {
+    margin-left: 15px;
     width: 980px;
     height: 500px;
     overflow: auto;
@@ -193,12 +205,14 @@ table {
     margin: 15px auto;
 }  
 caption {
+    margin-left: 0px;
+    text-align: center;
     font-size: 18px;
     font-weight: 400;
     padding: 12px 0;
 }  
 thead th {
-    background: #acbebe;
+    background: rgba(206, 206, 4, 0.891);
     color: #f4f4ef;
     font-weight: initial;
 }  
@@ -220,7 +234,7 @@ tfoot td {
     font-style: italic;
     color: #8a97a0;
 }
-.drAndCrContainer {
+.acctProcess {
     width: 80%;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     margin: 10px auto;
@@ -245,6 +259,10 @@ td button {
     background: red;
     color: #f4f4ef;
 }
+#updateBtn {
+    background: #0000ff;
+    color: #f4f4ef;
+}
 #acctTable {
     width: 980px;
     height: 700px;
@@ -255,7 +273,7 @@ td button {
     padding: 10px;
     cursor: pointer;
     border-radius: 4px;
-    background: #acbebe;
+    background: rgba(206, 206, 4, 0.891);
     color: #f4f4ef;
 }
 
@@ -293,7 +311,7 @@ td button {
         border-bottom: 1px solid rgba(0,0,0,0.1); 
       }
     aside {
-        width: 100%;
+        width: 92%;
     }
       /* .acctStatus,
       .acctBalance {
@@ -310,32 +328,53 @@ td button {
         margin: 10px;
         /* justify-content: space-evenly; */
     }
+    .acctOverview {
+        flex-flow: row wrap;
+    }
+    #acct2 {
+        margin: 15px;
+    }
+    #acct1 {
+        margin: 15px;
+    }
     #acctOption {
         align-self: flex-start;
     }
     select {
         padding: 5px;
         margin: 5px;
-        width: 100px;
-        font-size: 8px;
+        width: 60%;
+        font-size: 100%;
     }
     input[type=button], input[type=submit] {
         padding: 5px;
         margin: 5px;
-        width: 100px;
-        font-size: 8px;
+        width: 50%;
+        font-size: 100%;
     }
     #transTable {
-        width: 100%;
-        height: 300px;
+        width: 95%;
+        height: 400px;
         overflow: auto;
         flex-flow: row wrap;
         margin-top: 30px;
         align-self: flex-start;
     }
+    table {
+        max-width: 200px;
+        margin: 10px auto;
+    } 
+    caption {
+        padding: 10px auto;
+        text-align: justify;
+    } 
+    th, td {
+        text-align: left;
+        padding: 10px;
+    } 
     #acctTable {
         width: 100%;
-        height: 300px;
+        height: 400px;
         overflow: auto;
         flex-flow: row wrap;
         margin-top: 30px;
