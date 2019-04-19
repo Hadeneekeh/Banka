@@ -11,13 +11,13 @@ body {
 	width: 0;
 	height: 0;
 	border-top: 10px solid transparent;
-	border-left: 20px solid #acbebe;
+	border-left: 20px solid #f4f4ef;
     border-bottom: 10px solid transparent;
     float: left;
     margin-right: 2px;
 }
 header {
-    color: #f4f4ef;
+    color: #0000ff;
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -26,11 +26,11 @@ header a {
     color: #f4f4ef;
     text-decoration: none;
     font-size: 18px;
-    background: #a01d26;
+    background: #0000ff;
     padding: 10px;
 }
 header a:hover {
-    color: #a01d26;
+    color: #0000ff;
     background: #f4f4ef;
 }
 
@@ -47,8 +47,8 @@ header #brand-name {
 }
 header #brand-name h1 {
     margin: 0;
-    font: 200 35px/0.4 'Great Vibes', Helvetica, sans-serif;
-    text-shadow: 4px 4px 3px rgba(243, 11, 11, 0.898); 
+    font: 200 40px/0.4 'Great Vibes', Helvetica, sans-serif;
+    text-shadow: 2px 3px 2px rgba(206, 206, 4, 0.741); 
 }
 header nav {
     align-self: flex-end;
@@ -62,11 +62,11 @@ header nav {
     width: 300px;
 	height: 350px;
 	transform: skew(348deg);
-    border-left: 5px solid #acbebe;
-    border-bottom: 5px solid #acbebe;
+    border-left: 5px solid #f4f4ef;
+    border-bottom: 5px solid #f4f4ef;
     padding: 10px;
     margin: 70px;
-    background: #f4f4ef;
+    background: rgba(206, 206, 4, 0.891);
     float: left;
 }
 input[type=tel] {
@@ -83,17 +83,20 @@ input[type=text], input[type=password], input[type=email] {
 }
 input[type=button], input[type=submit] {
     width: 50%;
+    color: #f4f4ef;
+    font-size: 100%;
     padding: 10px;
     margin: 5px 5px 10px 0;
     display: inline-block;
-    background: #acbebe;
+    background: #0000ff;
+    cursor: pointer;
 }
 input[type=submit]:hover, input[type=button]:hover {
     color: #f4f4ef;
-    background-color: #a01d26;
+    background-color: rgba(206, 206, 4, 0.891);
 }
 h3 {
-    color: #f4f4ef;
+    color: #20232a;
     line-height: 1.5em;
 }
 #intro {
@@ -103,11 +106,11 @@ h3 {
     margin-top: 60px;
 }
 a {
-    color: #a01d26;
+    color: #0000ff;
 }
 footer {
     text-align: center;
-    background: #a01d26;
+    background: #0000ff;
     color: #f4f4ef;
     margin-top: 200px;
     margin-bottom: 0;
@@ -121,7 +124,7 @@ footer {
     width: 30%;
     padding: 0 5px 0 20px;
     margin: 0 5px 5px 5px;
-    background: #f4f4ef;
+    background: rgba(206, 206, 4, 0.891);
     opacity: 0.9;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -137,7 +140,7 @@ footer {
     width: 50%;
     padding: 0 10px 0 10px;
     margin: 0 5px 5px 5px;
-    background: #f4f4ef;
+    background: rgba(206, 206, 4, 0.891);
     opacity: 0.9;
     align-self: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -150,7 +153,7 @@ footer {
         width: 0;
         height: 0;
         border-top: 5px solid transparent;
-        border-left: 10px solid #acbebe;
+        border-left: 10px solid #f4f4ef;
         border-bottom: 5px solid transparent;
     }
     header a {
