@@ -1,6 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
+import { it } from 'mocha';
 
 chai.should();
 chai.use(chaiHttp);
@@ -33,6 +34,91 @@ describe('Test for User signUp controller', () => {
             expect(res.body.data).to.have.property('lastName');
             expect(res.body.data).to.have.property('email');
             expect(res.body.data.token).to.be.a('string');
+            done();
+        });
+    });
+
+    it('should not register a user when first name is missing', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            firstName: '',
+            lastName: 'Ire',
+            email: 'test@banka.com',
+            password: 'password'
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
+        });
+    });
+
+    it('should not register a user when last name is missing', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            firstName: 'Ire',
+            lastName: '',
+            email: 'test@banka.com',
+            password: 'password'
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
+        });
+    });
+
+    it('should not register a user when the supplied email is not valid', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            firstName: 'Ire',
+            lastName: 'Habi',
+            email: 'test',
+            password: 'password'
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
+        });
+    });
+
+    it('should not register a user when password is missing', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            firstName: 'Ire',
+            lastName: 'Habi',
+            email: 'test',
+            password: ''
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
+        });
+    });
+
+    it('should not register a user when email is missing', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            firstName: 'Ire',
+            lastName: 'Habi',
+            email: '',
+            password: 'password'
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
             done();
         });
     });
@@ -106,6 +192,51 @@ describe('Test for User signIn controller', () => {
             expect(res.body).to.be.a('object');
             expect(res.body.status).to.equal(400);
             expect(res.body).to.have.property('error');
+            done();
+        });
+    });
+
+    it('should not sign in a user when password is missing', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            email: 'test',
+            password: ''
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
+        });
+    });
+
+    it('should not sign in a user when email is missing', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            email: '',
+            password: 'password'
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
+        });
+    });
+
+    it('should not sign in a user when the supplied email is invalid', (done) => {
+        chai.request(app)
+        .post(signUpUrl)
+        .send({
+            email: 'test',
+            password: 'password'
+        })
+        .end((err, res) =>{
+            res.should.have.status(401);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
             done();
         });
     });
