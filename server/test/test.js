@@ -242,36 +242,62 @@ describe('Test for User signIn controller', () => {
     });
 });
 
-// describe('Test for create bank account', () => {
-//     it('should create an account', (done) => {
-//         chai.request(app)
-//         .post(signInUrl)
-//         .send({
-//             email: 'g.ade@banka.com',
-//             password: 'password',
-//         })
-//         .end((loginErr, loginRes) => {
-//             const token = `Bearer ${loginRes.body.data.token}`;
+describe('Test for create bank account', () => {
+    it('should create an account', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+             email: 'test@banka.com',
+             password: 'password'
+        })
+        .end((loginErr, loginRes) => {
+            const token = `Bearer ${loginRes.body.data.token}`;
         
 
-//         chai.request(app)
-//         .post(accountUrl)
-//         .set('Authorization', token)
-//         .send({
-//             type: 'savings',
-//             openingBalance: 10000.00,
-//         })
-//         .end((err, res) => {
-//             expect(res).to.have.status(200);
-//             expect(res.body).to.be.a('object');
-//             expect(res.body.status).to.equal(200);
-//             expect(res.body).to.have.property('data');
-//             expect(res.body.data).to.be.a('object');
-//             done();
-//         });
-//     });
-//     });
-// });
+        chai.request(app)
+        .post(accountUrl)
+        .set('Authorization', token)
+        .send({
+            type: 'savings',
+            openingBalance: 10000.00,
+        })
+        .end((err, res) => {
+            expect(res).to.have.status(201);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(201);
+            expect(res.body).to.have.property('data');
+            expect(res.body.data).to.be.a('object');
+            done();
+        });
+    });
+    });
+
+    it('it should not create account when type is not selected', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+             email: 'test@banka.com',
+             password: 'password'
+        })
+        .end((loginErr, loginRes) => {
+            const token = `Bearer ${loginRes.body.data.token}`;
+        
+
+        chai.request(app)
+        .post(accountUrl)
+        .set('Authorization', token)
+        .send({
+            type: '',
+        })
+        .end((err, res) =>{
+            res.should.have.status(400);
+            res.body.should.be.a('object');
+            res.body.should.have.property('error');
+            done();
+    });
+});
+    });
+});
 
 
 // describe('Test for update account status', () => {
