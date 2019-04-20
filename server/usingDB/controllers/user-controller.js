@@ -46,7 +46,8 @@ const User = {
         try {
             const { rows } = await db.query(createUserQuery.users.loginUser, [req.body.email]);
 
-            const token = await helper.generateToken({id: rows[0].id, email: rows[0].email, isAdmin: rows[0].isadmin, type: rows[0].type});
+
+            const token = await helper.generateToken({rows});
 
 
             if(!helper.comparePassword(req.body.password, rows[0].hashpassword)) {
