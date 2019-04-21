@@ -13,7 +13,8 @@
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
     "create": "babel-node server/usingDB/migration/createTable.js",
     "drop": "babel-node server/usingDB/migration/dropTable.js",
-    "migrate": "npm run drop && npm run create"
+    "migrate": "npm run drop && npm run create && npm run seeding",
+    "seeding": "babel-node server/usingDB/migration/seed.js"
   },
   "repository": {
     "type": "git",

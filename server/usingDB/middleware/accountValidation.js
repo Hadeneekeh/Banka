@@ -3,6 +3,7 @@ import { check, validationResult } from 'express-validator/check';
 const accountValidation = [
     
         check('type').not().isEmpty().withMessage('Account type can not be empty').isAlpha().isLength({ min: 7 }),
+        
 
 
         (req, res, next) => {
