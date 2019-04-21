@@ -38,17 +38,10 @@ const accounts = {
     },
 
     async updateAccount(req, res) {
-        const { status } = req.body;
-        const { accountNumber } = req.params;
-
-// console.log(req.params);
-// console.log(req.body);
-
 
         try {
             const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber]);
 
-//console.log(rows[0]);
             
             if(!rows[0]) {
                 return res.status(404).json({
@@ -58,7 +51,6 @@ const accounts = {
             }
 
             const update = await db.query(accountQuery.accounts.updateAccount, [req.body.status, req.params.accountNumber]);
-            //console.log(update);
             
             return res.status(200).json({
                 status: res.statusCode,
@@ -70,9 +62,7 @@ const accounts = {
                 ]
             });
 
-        } catch (error) {
-            console.log(error);
-            
+        } catch (error) {            
             return res.status(404).json({
                 status: res.statusCode,
                 error: 'Check your input'
@@ -80,6 +70,31 @@ const accounts = {
         }
         
     },
+
+    async deleteAccount(req, res) {
+        try {
+            const { rows } = await db.query(accountQuery.accounts.deleteAnAccount, [req.params.accountNumber]);
+console.log(rows);
+
+            if(!rows[0]) {
+                return res.status(404).json({
+                    status: res.statusCode,
+                    error: 'Account not found'
+                });
+            }
+
+            return res.status(200).json({
+                status: res.statusCode,
+                message: 'Account successfully deleted'
+            });
+        } 
+        catch (error) {
+            return res.status(404).json({
+                status: res.statusCode,
+                error: 'Check your input'
+            });
+        }
+    }
 }
 
 export default accounts;
