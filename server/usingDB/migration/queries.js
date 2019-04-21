@@ -6,7 +6,8 @@
       accounts: {
         createAccount: `INSERT into accounts(accountNumber, owner, type)VALUES($1, $2, $3)RETURNING *`,
         updateAccount: `UPDATE accounts SET status=$1 WHERE accountNumber=$2 RETURNING *`,
-        findAnAccount: `SELECT * FROM accounts WHERE accountNumber=$1`
+        findAnAccount: `SELECT * FROM accounts WHERE accountNumber=$1`,
+        deleteAnAccount: `DELETE FROM accounts WHERE accountNumber=$1 RETURNING *`
       },
   }
   export default queries;

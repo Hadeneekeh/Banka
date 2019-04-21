@@ -11,6 +11,7 @@ const signUpUrl = '/api/v1/auth/signup';
 const signInUrl = '/api/v1/auth/signin'; 
 const accountUrl = '/api/v1/accounts';
 const accountUpdateUrl = '/api/v1/accounts/2345987610';
+const accountDeleteUrl = '/api/v1/accounts/9874561230';
 const accountDebitUrl = '/api/v1/transactions/2345987610/debit';
 const accountCreditUrl = '/api/v1/transactions/2345987610/credit';
 
@@ -330,55 +331,55 @@ describe('Test for update account status', () => {
     });
     });
 
-//     describe('Test for Delete an account', () => {
-//         it('should delete an account', (done) => {
-//         chai.request(app)
-//         .post(signInUrl)
-//         .send({
-//             email: 'm.eny@banka.com',
-//             password: 'password',
-//         })
-//         .end((loginErr, loginRes) => {
-//             const token = `Bearer ${loginRes.body.data.token}`;
+    describe('Test for Delete an account', () => {
+        it('should delete an account', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+            email: 'hadeneekeh01@gmail.com',
+            password: 'password',
+        })
+        .end((loginErr, loginRes) => {
+            const token = `Bearer ${loginRes.body.data.token}`;
         
-//         chai.request(app)
-//         .delete(accountUpdateUrl)
-//         .set('Authorization', token)
-//         .end((err, res) => {
-//             expect(res).to.have.status(200);
-//             expect(res.body).to.be.a('object');
-//             expect(res.body.status).to.equal(200);
-//             expect(res.body).to.have.property('message');
-//             expect(res.body.message).to.equal('Account deleted successfully');
-//             done();
-//         });
-//     });
-//     });
+        chai.request(app)
+        .delete(accountDeleteUrl)
+        .set('Authorization', token)
+        .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(200);
+            expect(res.body).to.have.property('message');
+            expect(res.body.message).to.equal('Account successfully deleted');
+            done();
+        });
+    });
+    });
 
-//     it('should not authorize a user that is not admin', (done) => {
-//         chai.request(app)
-//         .post(signInUrl)
-//         .send({
-//             email: 'g.ade@banka.com',
-//             password: 'password',
-//         })
-//         .end((loginErr, loginRes) => {
-//             const token = `Bearer ${loginRes.body.data.token}`;
+    it('should not authorize a user that is not admin', (done) => {
+        chai.request(app)
+        .post(signInUrl)
+        .send({
+            email: 'ade.banke@example.com',
+            password: 'password',
+        })
+        .end((loginErr, loginRes) => {
+            const token = `Bearer ${loginRes.body.data.token}`;
         
-//         chai.request(app)
-//         .delete(accountUpdateUrl)
-//         .set('Authorization', token)
-//         .end((err, res) => {
-//             expect(res).to.have.status(401);
-//             expect(res.body).to.be.a('object');
-//             expect(res.body.status).to.equal(401);
-//             expect(res.body).to.have.property('error');
-//             expect(res.body.error).to.equal('Unauthorized');
-//             done();
-//         });
-//         });
-//     });
-// });
+        chai.request(app)
+        .delete(accountDeleteUrl)
+        .set('Authorization', token)
+        .end((err, res) => {
+            expect(res).to.have.status(401);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(401);
+            expect(res.body).to.have.property('error');
+            expect(res.body.error).to.equal('Unauthorized');
+            done();
+        });
+        });
+    });
+});
 
 
 // describe('Test for the endpoint to debit an account', () => {
