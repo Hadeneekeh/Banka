@@ -25,7 +25,7 @@ import pool from '../../db';
           FOREIGN KEY (owner) REFERENCES users (id) ON DELETE CASCADE
           )`);
          
-          //console.log(accountsTable);
+          console.log(accountsTable);
           
       } catch (error) {
            console.log(error);
