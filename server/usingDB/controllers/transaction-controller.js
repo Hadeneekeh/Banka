@@ -70,12 +70,12 @@ const transactions = {
     async creditAccount(req, res) {
         try {
             const accountNumber = req.params.accountNumber;
-            const amount = parseInt(req.body.amount);
+            const amount = parseFloat(req.body.amount);
     
             const { rows } = await db.query(transactionQuery.accounts.findAnAccount, [accountNumber]);
     
             const oldBalance = rows[0].balance;
-            const newBalance = oldBalance + amount;
+            const newBalance = parseFloat(oldBalance) + (parseFloat(amount));
     
             const updateAcctountBal = await db.query(transactionQuery.accounts.updateAccountBal, [newBalance, rows[0].accountnumber]);
 
