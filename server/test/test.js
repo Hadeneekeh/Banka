@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../index';
-import { it } from 'mocha';
+import { it, describe } from 'mocha';
 
 chai.should();
 chai.use(chaiHttp);
@@ -497,6 +497,32 @@ describe('Test for the endpoint to credit an account', () => {
                 expect(res.body.data[0]).to.have.property('amount');
                 expect(res.body.data[0]).to.have.property('cashier');
                 expect(res.body.data[0]).to.have.property('accountBalance');
+                done();
+            });
+        });
+    });
+});
+
+describe('Test for endpoint to view all accounts', () => {
+    it('should display all accounts if admin sign in', (done) => {
+            chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'hadeneekeh01@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .get(accountUrl)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(200);
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.be.a('Array');
                 done();
             });
         });
