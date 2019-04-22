@@ -9,5 +9,6 @@ const dbAcctRoute = express.Router();
 dbAcctRoute.post('/', accountValidation, authorize.checkUser, dbAcctController.createAccount);
 dbAcctRoute.patch('/:accountNumber', authorize.checkAdmin, dbAcctController.updateAccount);
 dbAcctRoute.delete('/:accountNumber', authorize.checkAdmin, dbAcctController.deleteAccount);
+dbAcctRoute.get('/', authorize.checkAdmin, dbAcctController.getAllAccounts)
 
 export default dbAcctRoute;

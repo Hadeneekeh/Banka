@@ -8,7 +8,8 @@
         updateAccount: `UPDATE accounts SET status=$1 WHERE accountNumber=$2 RETURNING *`,
         findAnAccount: `SELECT * FROM accounts WHERE accountNumber=$1`,
         deleteAnAccount: `DELETE FROM accounts WHERE accountNumber=$1 RETURNING *`,
-        updateAccountBal: `UPDATE accounts SET balance=$1 WHERE accountNumber=$2`
+        updateAccountBal: `UPDATE accounts SET balance=$1 WHERE accountNumber=$2`,
+        getAllAccounts: `SELECT * FROM accounts`
       },
 
       transactions: {
