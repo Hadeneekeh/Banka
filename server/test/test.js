@@ -273,6 +273,8 @@ describe('Test for create bank account', () => {
     });
     });
 
+    
+
     it('it should not create account when type is not selected', (done) => {
         chai.request(app)
         .post(signInUrl)
@@ -382,39 +384,90 @@ describe('Test for update account status', () => {
 });
 
 
-// describe('Test for the endpoint to debit an account', () => {
-//     it('should debit an account when the login user is authorized', (done) => {
-//             chai.request(app)
-//             .post(signInUrl)
-//             .send({
-//                 email: 'g.ade@banka.com',
-//                 password: 'password',
-//             })
-//             .end((loginErr, loginRes) => {
-//                 const token = `Bearer ${loginRes.body.data.token}`;
+describe('Test for the endpoint to debit an account', () => {
+    it('should debit an account when the login user is authorized', (done) => {
+            chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'cashier@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
             
-//             chai.request(app)
-//             .post(accountDebitUrl)
-//             .set('Authorization', token)
-//             .send({
-//                 amount: 2000
-//             })
-//             .end((err, res) => {
-//                 expect(res).to.have.status(200);
-//                 expect(res.body).to.be.a('object');
-//                 expect(res.body).to.have.property('data');
-//                 expect(res.body.data).to.be.a('object');
-//                 expect(res.body.data).to.have.property('transactionId');                
-//                 expect(res.body.data).to.have.property('transactionType');
-//                 expect(res.body.data).to.have.property('accountNumber');
-//                 expect(res.body.data).to.have.property('amount');
-//                 expect(res.body.data).to.have.property('cashier');
-//                 expect(res.body.data).to.have.property('accountBalance');
-//                 done();
-//             });
-//         });
-//     });
-// });
+            chai.request(app)
+            .post(accountDebitUrl)
+            .set('Authorization', token)
+            .send({
+                amount: 2000
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(201);
+                expect(res.body).to.be.a('object');
+                expect(res.body).to.have.property('data');
+                expect(res.body.data[0]).to.have.property('transactionId');                
+                expect(res.body.data[0]).to.have.property('transactionType');
+                expect(res.body.data[0]).to.have.property('accountNumber');
+                expect(res.body.data[0]).to.have.property('amount');
+                expect(res.body.data[0]).to.have.property('cashier');
+                expect(res.body.data[0]).to.have.property('accountBalance');
+                done();
+            });
+        });
+    });
+
+    it('should not debit account when amount is empty', (done) => {
+        chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'cashier@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .post(accountDebitUrl)
+            .set('Authorization', token)
+            .send({
+                amount: ''
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(400);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+        });
+    });
+
+    it('should not debit account when amount is not a number', (done) => {
+        chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'cashier@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .post(accountDebitUrl)
+            .set('Authorization', token)
+            .send({
+                amount: 'asdf'
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(400);
+                expect(res.body).to.have.property('error');
+                done();
+            });
+        });
+    });
+});
 
 // describe('Test for the endpoint to credit an account', () => {
 //     it('should credit an account when the login user is authorized', (done) => {

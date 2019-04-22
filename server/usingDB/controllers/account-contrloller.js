@@ -27,9 +27,7 @@ const accounts = {
             })
         } 
         
-        catch (error) {
-            console.log(error);
-            
+        catch (error) {            
             return res.status(400).json({
                 status: res.statusCode,
                 error: error
@@ -74,7 +72,6 @@ const accounts = {
     async deleteAccount(req, res) {
         try {
             const { rows } = await db.query(accountQuery.accounts.deleteAnAccount, [req.params.accountNumber]);
-console.log(rows);
 
             if(!rows[0]) {
                 return res.status(404).json({

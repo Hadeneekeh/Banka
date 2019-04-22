@@ -8,7 +8,8 @@ import bodyParser from 'body-parser';
 //import transactionRoute from './routes/transaction.route';
 
 import userWithDb from './usingDB/route/userRouteWithDB';
-import accountWithDB from './usingDB/route/acctRouteWithDB'
+import accountWithDB from './usingDB/route/acctRouteWithDB';
+import transactionWithDB from './usingDB/route/transactRouteWithDB';
 
 
 const app = express();
@@ -26,7 +27,7 @@ app.get('/', (req, res) => res.send('Welcome to Banka'));
 
 app.use('/api/v1/auth', userWithDb);
 app.use('/api/v1/accounts', accountWithDB);
-
+app.use('/api/v1/transactions', transactionWithDB);
 
 
 app.listen(port, () => console.log(`Server is running on PORT ${port}`));

@@ -24,8 +24,19 @@ import pool from '../../db';
           balance numeric (100, 2) DEFAULT 0.00,
           FOREIGN KEY (owner) REFERENCES users (id) ON DELETE CASCADE
           )`);
+
+        const transactionsTable = await pool.query(`CREATE TABLE IF NOT EXISTS transactions(
+          id serial PRIMARY KEY,
+          createdOn TIMESTAMP NOT NULL,
+          type text NOT NULL,
+          accountNumber numeric REFERENCES accounts(accountNumber) on DELETE CASCADE,
+          cashier INT REFERENCES users(id),
+          amount numeric NOT NULL,
+          oldBalance numeric (100, 2) NOT NULL,
+          newBalance numeric (100, 2) NOT NULL
+          )`);
          
-          console.log(accountsTable);
+          console.log(transactionsTable);
           
       } catch (error) {
            console.log(error);
