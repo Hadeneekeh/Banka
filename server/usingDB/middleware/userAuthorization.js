@@ -14,20 +14,35 @@ const Verification = {
         const token = req.headers.authorization.split(' ')[1];
         const decode = usersVerification.verifyToken(token);
 
-        req.user = decode;
-       // console.log(req.user.rows[0].isadmin);
-        
+        req.user = decode;        
 
         if(!req.user.rows[0].isadmin) {
-        return res.status(401).send({
-            status: res.statusCode,
-            error: 'Unauthorized'
+            return res.status(401).send({
+                status: res.statusCode,
+                error: 'Unauthorized'
         });
     }
         
         return next();
         
     },
+
+    checkCashier(req, res, next) {
+        const token = req.headers.authorization.split(' ')[1];
+        const decode = usersVerification.verifyToken(token);
+        
+        req.user = decode;
+        
+        if(req.user.rows[0].type !== 'cashier') {
+            return res.status(401).json({
+                status: res.statusCode,
+                error: 'Unauthorized'
+            });
+        }
+                
+        return next();
+                
+    }
 
 
 }

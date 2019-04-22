@@ -7,7 +7,12 @@
         createAccount: `INSERT into accounts(accountNumber, owner, type)VALUES($1, $2, $3)RETURNING *`,
         updateAccount: `UPDATE accounts SET status=$1 WHERE accountNumber=$2 RETURNING *`,
         findAnAccount: `SELECT * FROM accounts WHERE accountNumber=$1`,
-        deleteAnAccount: `DELETE FROM accounts WHERE accountNumber=$1 RETURNING *`
+        deleteAnAccount: `DELETE FROM accounts WHERE accountNumber=$1 RETURNING *`,
+        updateAccountBal: `UPDATE accounts SET balance=$1 WHERE accountNumber=$2`
       },
+
+      transactions: {
+        createTransaction: `INSERT INTO transactions(createdOn, type, accountNumber, cashier, amount, oldBalance, newBalance)VALUES($1, $2, $3, $4, $5, $6, $7)RETURNING *`,
+      }
   }
   export default queries;

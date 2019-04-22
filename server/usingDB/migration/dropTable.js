@@ -7,6 +7,7 @@ import pool from '../../db';
       try {
         const dropUserTable = await pool.query(`DROP TABLE IF EXISTS users CASCADE`);
         const dropAccountTable = await pool.query(`DROP TABLE IF EXISTS accounts CASCADE`);
+        const dropTransactionTable = await pool.query(`DROP TABLE IF EXISTS transactions CASCADE`)
       } 
       
       catch (error) {
