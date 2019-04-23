@@ -107,6 +107,29 @@ const accounts = {
             return res.status(400).send(error);            
         }
     },
+
+    async viewAnAccount(req, res) {
+        try {
+            const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber]);
+
+
+            return res.status(200).json({
+                status: res.statusCode,
+                data: [
+                    {
+                        createdOn: rows[0].createdon,
+                        accountNumber: rows[0].accountnumber,
+                        ownerEmail: req.user.rows[0].email,
+                        type: rows[0].type,
+                        status: rows[0].status,
+                        balance: rows[0].balance
+                    }
+                ]
+            })
+        } catch (error) {
+            return res.status(400).send(error);
+        }
+    }
 }
 
 export default accounts;
