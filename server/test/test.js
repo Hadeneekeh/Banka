@@ -528,3 +528,30 @@ describe('Test for endpoint to view all accounts', () => {
         });
     });
 });
+
+describe('Endpoint to view an account details', () => {
+    it('should display details a specified account', (done) => {
+            chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'ade.banke@example.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .get(accountUpdateUrl)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(200);
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.be.a('Array');
+                expect(res.body.data[0]).to.be.a('Object');
+                done();
+             });
+        })
+    });
+});

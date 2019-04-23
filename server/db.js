@@ -1,17 +1,16 @@
 import { Pool } from 'pg';
 import dotenv from 'dotenv';
 
-let connectionString;
 dotenv.config();
 
-if(process.env.NODE_ENV === 'test') {
+let connectionString = process.env.DATABASE_URL;
+if(process.env.ENV_TEST) {
   connectionString = process.env.TEST_URL;
-} else { 
-  connectionString = process.env.DATABASE_URL;
 }
 
+console.log(connectionString);
 const pool = new Pool({
-  connectionString : connectionString,
+  connectionString,
 });
 
 
