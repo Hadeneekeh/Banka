@@ -1,14 +1,8 @@
 language: node_js
+cache:
+- node_modules
 node_js:
 - stable
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-5
-before_install:
-  - npm install -g node-gyp
 before_script:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
