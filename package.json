@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node build/index.js",
     "dev": "nodemon --exec babel-node server/index.js",
-    "test": "cross-env NODE_ENV=test && npm run migrate && nyc mocha server/test/test.js --require @babel/register --exit",
+    "test": "set ENV_TEST=true && npm run migrate && nyc mocha server/test/test.js --require @babel/register --exit",
     "build": "rm -rf build && mkdir build && babel -d ./build ./server",
     "heroku-postbuild": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
