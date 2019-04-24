@@ -26,7 +26,8 @@ app.get('/', (req, res) => res.send('Welcome to Banka'));
 //app.use('/api/v1/transactions', transactionRoute);
 
 app.use('/api/v1/auth', userWithDb);
-app.use('/api/v1/accounts', accountWithDB);
+app.use('/api/v1', accountWithDB);
+//app.use('/api/v1/user', accountWithDB);
 app.use('/api/v1/transactions', transactionWithDB);
 
 

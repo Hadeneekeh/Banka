@@ -1,5 +1,6 @@
 import db from '../../db';
 import accountQuery from '../migration/queries';
+import moment from 'moment';
 
 const accounts = {
     async createAccount(req, res){       
@@ -7,6 +8,7 @@ const accounts = {
         
         const values = [
             accountNumber,
+            moment(new Date()),
             req.user.rows[0].id,
             req.body.type
         ];
@@ -129,6 +131,28 @@ const accounts = {
         } catch (error) {
             return res.status(400).send(error);
         }
+    },
+
+    async viewAcctByEmail(req, res) {
+        try {
+            const findEmail = await db.query(accountQuery.users.findUser, [req.params.userEmailAddress]);
+
+            if(findEmail.rowCount < 1) {
+                return res.status(404).json({
+                    status: res.statusCode,
+                    error: 'Email does not exist'
+                })
+            }
+
+            const { rows } = await db.query(accountQuery.accounts.getAnAcctByEmail, [req.params.userEmailAddress]);
+
+            return res.status(200).json({
+                status: res.statusCode,
+                accounts: rows
+             });
+
+        } catch (error) {
+            return res.status(400).send(error);        }
     }
 }
 

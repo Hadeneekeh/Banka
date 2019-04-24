@@ -14,6 +14,7 @@ const accountUpdateUrl = '/api/v1/accounts/2345987610';
 const accountDeleteUrl = '/api/v1/accounts/9874561230';
 const accountDebitUrl = '/api/v1/transactions/2345987610/debit';
 const accountCreditUrl = '/api/v1/transactions/2345987610/credit';
+const getAllAccountsByEmail = '/api/v1//user/ade.banke@example.com/accounts';
 
 
 describe('Test for User signUp controller', () => {
@@ -553,5 +554,56 @@ describe('Endpoint to view an account details', () => {
                 done();
              });
         })
+    });
+});
+
+describe('Endpoint to get account by email', () => {
+        it('should display all accounts of a specific user', (done) => {
+            chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'hadeneekeh01@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .get(getAllAccountsByEmail)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(200);
+                expect(res.body).to.have.property('accounts');
+                expect(res.body.accounts).to.be.a('Array');
+                expect(res.body.accounts[0]).to.be.a('Object');
+                done();
+            });
+        })
+    });
+    
+    it('should not display accounts if email does not exist', (done) => {
+        chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'hadeneekeh01@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .get('/api/v1//user/ade.bank@example.com/accounts')
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(404);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('Email does not exist');
+                done();
+            });
+        });
     });
 });
