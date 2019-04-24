@@ -607,3 +607,55 @@ describe('Endpoint to get account by email', () => {
         });
     });
 });
+
+describe('Test for endpoint to get accounts using account status', () => {
+    it('should display active accounts when admin signs in', (done) => {
+            chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'hadeneekeh01@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .get(`${accountUrl}/?status=active`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(200);
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.be.a('Array');
+                expect(res.body.data[0].status).to.equal('active');
+                done();
+            });
+        });
+    });
+
+    it('should display active accounts when admin signs in', (done) => {
+            chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'hadeneekeh01@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .get(`${accountUrl}/?status=dormant`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(200);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(200);
+                expect(res.body).to.have.property('data');
+                expect(res.body.data).to.be.a('Array');
+                expect(res.body.data[0].status).to.equal('dormant');
+                done();
+            });
+        });
+    });
+});
