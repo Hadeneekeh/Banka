@@ -6,10 +6,11 @@ import { accountValidation } from '../middleware/accountValidation';
 
 const dbAcctRoute = express.Router();
 
-dbAcctRoute.post('/', accountValidation, authorize.checkUser, dbAcctController.createAccount);
-dbAcctRoute.patch('/:accountNumber', authorize.checkAdmin, dbAcctController.updateAccount);
-dbAcctRoute.delete('/:accountNumber', authorize.checkAdmin, dbAcctController.deleteAccount);
-dbAcctRoute.get('/', authorize.checkAdmin, dbAcctController.getAllAccounts);
-dbAcctRoute.get('/:accountNumber', authorize.checkUser, dbAcctController.viewAnAccount);
+dbAcctRoute.post('/accounts', accountValidation, authorize.checkUser, dbAcctController.createAccount);
+dbAcctRoute.patch('/accounts/:accountNumber', authorize.checkAdmin, dbAcctController.updateAccount);
+dbAcctRoute.delete('/accounts/:accountNumber', authorize.checkAdmin, dbAcctController.deleteAccount);
+dbAcctRoute.get('/accounts', authorize.checkAdmin, dbAcctController.getAllAccounts);
+dbAcctRoute.get('/accounts/:accountNumber', authorize.checkUser, dbAcctController.viewAnAccount);
+dbAcctRoute.get('/user/:userEmailAddress/accounts', authorize.checkAdmin, dbAcctController.viewAcctByEmail);
 
 export default dbAcctRoute;

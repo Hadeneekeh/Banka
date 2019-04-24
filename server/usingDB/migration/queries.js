@@ -2,15 +2,18 @@
       users : {
         createUser:  'INSERT INTO users(firstName, lastName, email, hashpassword)VALUES($1, $2, $3, $4)RETURNING *',
         loginUser: 'SELECT * FROM users WHERE email = $1',
+        findUser: `SELECT * FROM users WHERE email=$1`,
       },
+
       accounts: {
-        createAccount: `INSERT into accounts(accountNumber, owner, type)VALUES($1, $2, $3)RETURNING *`,
+        createAccount: `INSERT into accounts(accountNumber, createdOn, owner, type)VALUES($1, $2, $3, $4)RETURNING *`,
         updateAccount: `UPDATE accounts SET status=$1 WHERE accountNumber=$2 RETURNING *`,
         findAnAccount: `SELECT * FROM accounts WHERE accountNumber=$1`,
         deleteAnAccount: `DELETE FROM accounts WHERE accountNumber=$1 RETURNING *`,
         updateAccountBal: `UPDATE accounts SET balance=$1 WHERE accountNumber=$2`,
         getAllAccounts: `SELECT * FROM accounts`,
-        
+        getAnAcctByEmail: `SELECT accounts.accountnumber, accounts.createdon, accounts.type, accounts.status, accounts.balance 
+        FROM users JOIN accounts ON users.id = accounts.owner WHERE users.email=$1`,      
       },
 
       transactions: {
