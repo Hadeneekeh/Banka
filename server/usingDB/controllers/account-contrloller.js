@@ -97,15 +97,26 @@ const accounts = {
 
     async getAllAccounts(req, res) {
         try {
+            if(!req.query.status) {
+            
             const { rows } = await db.query(accountQuery.accounts.getAllAccounts);
-
-            return res.status(200).json({
-               status: res.statusCode,
-               data: rows
+                return res.status(200).json({
+                status: res.statusCode,
+                data: rows
             });
+            } 
+            else {
 
-        } 
-        catch (error) {
+            const { rows } = await db.query(accountQuery.accounts.getDormantAcct, [req.query.status]);
+            
+                return res.status(200).json({
+                status: res.statusCode,
+                data: rows
+            });
+        };
+       
+        }
+        catch (error) {            
             return res.status(400).send(error);            
         }
     },

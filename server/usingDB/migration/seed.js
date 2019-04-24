@@ -26,11 +26,11 @@ async function seed() {
         );
 
         const createAccount = await pool.query(
-            `INSERT into accounts(accountNumber, createdOn, owner, type, balance)VALUES
-            ('2345987610', '${date}', '2', 'savings', '121456.89'),
-            ('9874561230', '${date}', '3', 'current', '745000'),
-            ('1289437654', '${date}', '3', 'savings', '43000'),
-            ('1432978650', '${date}', '2', 'current', '520000')`
+            `INSERT into accounts(accountNumber, createdOn, owner, type, status, balance)VALUES
+            ('2345987610', '${date}', '2', 'savings', 'active', '121456.89'),
+            ('9874561230', '${date}', '3', 'current', 'dormant', '745000'),
+            ('1289437654', '${date}', '3', 'savings', 'active', '43000'),
+            ('1432978650', '${date}', '2', 'current', 'dormant', '520000')`
         );
 
         const createTransaction = await pool.query(

@@ -13,7 +13,9 @@
         updateAccountBal: `UPDATE accounts SET balance=$1 WHERE accountNumber=$2`,
         getAllAccounts: `SELECT * FROM accounts`,
         getAnAcctByEmail: `SELECT accounts.accountnumber, accounts.createdon, accounts.type, accounts.status, accounts.balance 
-        FROM users JOIN accounts ON users.id = accounts.owner WHERE users.email=$1`,      
+        FROM users JOIN accounts ON users.id = accounts.owner WHERE users.email=$1`, 
+        getDormantAcct: `SELECT accounts.createdon, accounts.accountnumber, users.email, accounts.type, accounts.status, accounts.balance 
+        FROM users JOIN accounts ON users.id = accounts.owner WHERE accounts.status=$1`
       },
 
       transactions: {
