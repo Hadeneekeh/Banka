@@ -95,7 +95,7 @@ const accounts = {
         }
     },
 
-    async getAllAccounts(req, res) {
+    async getAccount(req, res) {
         try {
             if(!req.query.status) {
             
@@ -105,7 +105,7 @@ const accounts = {
                 data: rows
             });
             } 
-            else {
+            else if(req.query.status === 'active' || req.query.status === 'dormant'){
 
             const { rows } = await db.query(accountQuery.accounts.getDormantAcct, [req.query.status]);
             

@@ -25,7 +25,8 @@ app.use('/api/v1/transactions', transactionWithDB);
 
 app.use('*', (req, res) => {
     res.status(404).json({
-        msg: 'Wrong URL!!! The page can not be found'
+        status: res.statusCode,
+        errorr: 'Wrong URL!!! The page can not be found'
 });
 });
 
