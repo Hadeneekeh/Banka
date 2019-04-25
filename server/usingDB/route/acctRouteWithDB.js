@@ -1,16 +1,18 @@
 import express from 'express';
 import dbAcctController from '../controllers/account-contrloller';
 import authorize from '../middleware/userAuthorization';
+import statusCheck from '../middleware/statusCheck';
 
-import { accountValidation } from '../middleware/accountValidation';
+import { accountTypeValidation, accountStatusValidation, queryValidate } from '../middleware/accountValidation';
 
 const dbAcctRoute = express.Router();
 
-dbAcctRoute.post('/accounts', accountValidation, authorize.checkUser, dbAcctController.createAccount);
-dbAcctRoute.patch('/accounts/:accountNumber', authorize.checkAdmin, dbAcctController.updateAccount);
+dbAcctRoute.post('/accounts', accountTypeValidation, authorize.checkUser, dbAcctController.createAccount);
+dbAcctRoute.patch('/accounts/:accountNumber', accountStatusValidation, authorize.checkAdmin, dbAcctController.updateAccount);
 dbAcctRoute.delete('/accounts/:accountNumber', authorize.checkAdmin, dbAcctController.deleteAccount);
-dbAcctRoute.get('/accounts', authorize.checkAdmin, dbAcctController.getAllAccounts);
+dbAcctRoute.get('/accounts', statusCheck, authorize.checkAdmin, dbAcctController.getAccount);
 dbAcctRoute.get('/accounts/:accountNumber', authorize.checkUser, dbAcctController.viewAnAccount);
 dbAcctRoute.get('/user/:userEmailAddress/accounts', authorize.checkAdmin, dbAcctController.viewAcctByEmail);
+//dbAcctRoute.get('/accounts', authorize.checkAdmin, dbAcctController.getAnAccount);
 
 export default dbAcctRoute;

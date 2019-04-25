@@ -16,6 +16,23 @@ const accountDebitUrl = '/api/v1/transactions/2345987610/debit';
 const accountCreditUrl = '/api/v1/transactions/2345987610/credit';
 const getAllAccountsByEmail = '/api/v1//user/ade.banke@example.com/accounts';
 
+describe('Test for wrong route', () => {
+    it('should see a custom error message when hitting wrong route', (done) => {
+            chai.request(app)
+            .post('/api/v1/auth/sign')
+            .send({
+                firstName: 'Mat',
+                lastName: 'Eniola',
+                email: 'test@banka.com',
+                password: 'password'
+            })
+            .end((err, res) => {
+                expect(res.body.status).to.equal(404);
+                done();
+            });
+        });
+    });
+
 
 describe('Test for User signUp controller', () => {
     it('should register a new user when all the details are provided', (done) => {
@@ -50,7 +67,7 @@ describe('Test for User signUp controller', () => {
             password: 'password'
         })
         .end((err, res) =>{
-            res.should.have.status(401);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
             done();
@@ -67,7 +84,7 @@ describe('Test for User signUp controller', () => {
             password: 'password'
         })
         .end((err, res) =>{
-            res.should.have.status(401);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
             done();
@@ -84,7 +101,7 @@ describe('Test for User signUp controller', () => {
             password: 'password'
         })
         .end((err, res) =>{
-            res.should.have.status(401);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
             done();
@@ -101,7 +118,7 @@ describe('Test for User signUp controller', () => {
             password: ''
         })
         .end((err, res) =>{
-            res.should.have.status(401);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
             done();
@@ -118,7 +135,7 @@ describe('Test for User signUp controller', () => {
             password: 'password'
         })
         .end((err, res) =>{
-            res.should.have.status(401);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
             done();
@@ -200,7 +217,7 @@ describe('Test for User signIn controller', () => {
 
     it('should not sign in a user when password is missing', (done) => {
         chai.request(app)
-        .post(signUpUrl)
+        .post(signInUrl)
         .send({
             email: 'test',
             password: ''
@@ -215,7 +232,7 @@ describe('Test for User signIn controller', () => {
 
     it('should not sign in a user when email is missing', (done) => {
         chai.request(app)
-        .post(signUpUrl)
+        .post(signInUrl)
         .send({
             email: '',
             password: 'password'
@@ -236,7 +253,7 @@ describe('Test for User signIn controller', () => {
             password: 'password'
         })
         .end((err, res) =>{
-            res.should.have.status(401);
+            res.should.have.status(400);
             res.body.should.be.a('object');
             res.body.should.have.property('error');
             done();
@@ -320,7 +337,7 @@ describe('Test for update account status', () => {
         .patch(accountUpdateUrl)
         .set('Authorization', token)
         .send({
-            status: 'Dormant',
+            status: 'dormant',
         })
         .end((err, res) => {
             expect(res).to.have.status(200);
@@ -687,25 +704,3 @@ describe('Test for endpoint to get accounts using account status', () => {
     });
 });
 
-describe('Test for wrong route', () => {
-    it('should see a custom error message when hitting wrong route', (done) => {
-        chai.request(app)
-            .post(signInUrl)
-            .send({
-                email: 'hadeneekeh01@gmail.com',
-                password: 'password',
-            })
-            .end((loginErr, loginRes) => {
-                const token = `Bearer ${loginRes.body.data.token}`;
-            
-            chai.request(app)
-            .get(`/api/v1/account`)
-            .set('Authorization', token)
-            .end((err, res) => {
-                expect(res).to.have.status(404);
-                expect(res.body.msg).to.equal('Wrong URL!!! The page can not be found');
-                done();
-            });
-        });
-    });
-});

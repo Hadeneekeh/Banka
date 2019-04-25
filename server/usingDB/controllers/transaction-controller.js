@@ -7,17 +7,20 @@ const transactions = {
         try {
             const accountNumber = req.params.accountNumber;
             const amount = parseInt(req.body.amount);
-            const { rows } = await db.query(transactionQuery.accounts.findAnAccount, [accountNumber]);    
-            const oldBalance = rows[0].balance;
-            const newBalance = oldBalance - amount;
-            const updateAcctountBal = await db.query(transactionQuery.accounts.updateAccountBal, [newBalance, rows[0].accountnumber]);
-
+            const { rows } = await db.query(transactionQuery.accounts.findAnAccount, [accountNumber]);  
+              
             if(!rows[0]) {
                 return res.status(404).json({
                     status: res.statusCode,
                     error: 'Account not found'
                 });
             }
+
+            const oldBalance = rows[0].balance;
+            const newBalance = oldBalance - amount;
+            const updateAcctountBal = await db.query(transactionQuery.accounts.updateAccountBal, [newBalance, rows[0].accountnumber]);
+
+           
     
             const values = [
                 moment(new Date()),
@@ -58,18 +61,21 @@ const transactions = {
         try {
             const accountNumber = req.params.accountNumber;
             const amount = parseFloat(req.body.amount);   
-            const { rows } = await db.query(transactionQuery.accounts.findAnAccount, [accountNumber]);    
-            const oldBalance = rows[0].balance;
-            const newBalance = parseFloat(oldBalance) + (parseFloat(amount));
-    
-            const updateAcctountBal = await db.query(transactionQuery.accounts.updateAccountBal, [newBalance, rows[0].accountnumber]);
-
+            const { rows } = await db.query(transactionQuery.accounts.findAnAccount, [accountNumber]);  
+            
             if(!rows[0]) {
                 return res.status(404).json({
                     status: res.statusCode,
                     error: 'Account not found'
                 });
             }
+
+            const oldBalance = rows[0].balance;
+            const newBalance = parseFloat(oldBalance) + (parseFloat(amount));
+    
+            const updateAcctountBal = await db.query(transactionQuery.accounts.updateAccountBal, [newBalance, rows[0].accountnumber]);
+
+            
         
             const values = [
                 moment(new Date()),

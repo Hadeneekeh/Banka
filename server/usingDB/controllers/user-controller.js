@@ -71,6 +71,8 @@ const User = {
             })
 
         } catch (error) {
+            console.log(error);
+            
             return res.status(400).json({
                 status: res.statusCode,
                 error: 'Ensure your inputs are correct'
