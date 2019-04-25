@@ -12,6 +12,5 @@ dbAcctRoute.delete('/accounts/:accountNumber', authorize.checkAdmin, dbAcctContr
 dbAcctRoute.get('/accounts', authorize.checkAdmin, dbAcctController.getAllAccounts);
 dbAcctRoute.get('/accounts/:accountNumber', authorize.checkUser, dbAcctController.viewAnAccount);
 dbAcctRoute.get('/user/:userEmailAddress/accounts', authorize.checkAdmin, dbAcctController.viewAcctByEmail);
-//dbAcctRoute.get('/accounts', authorize.checkAdmin, dbAcctController.viewDormantAcct);////
 
 export default dbAcctRoute;

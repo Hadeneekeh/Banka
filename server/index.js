@@ -2,11 +2,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 
-
-//import userRoute from './routes/user.route';
-//import accountRoute from './routes/account.route';
-//import transactionRoute from './routes/transaction.route';
-
 import userWithDb from './usingDB/route/userRouteWithDB';
 import accountWithDB from './usingDB/route/acctRouteWithDB';
 import transactionWithDB from './usingDB/route/transactRouteWithDB';
@@ -21,15 +16,16 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 
 app.get('/', (req, res) => res.send('Welcome to Banka'));
-//app.use('/api/v1/auth', userRoute);
-//app.use('/api/v1/accounts', accountRoute);
-//app.use('/api/v1/transactions', transactionRoute);
+
 
 app.use('/api/v1/auth', userWithDb);
 app.use('/api/v1', accountWithDB);
-//app.use('/api/v1/user', accountWithDB);
 app.use('/api/v1/transactions', transactionWithDB);
 
+
+app.use('*', (req, res) => {
+    res.status(404).send('Wrong URL!!! The page can not be found');
+});
 
 app.listen(port, () => console.log(`Server is running on PORT ${port}`));
 
