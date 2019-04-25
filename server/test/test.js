@@ -417,6 +417,33 @@ describe('Test for the endpoint to debit an account', () => {
         });
     });
 
+    it('should not debit account when amount is less than balance', (done) => {
+        chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'cashier@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .post(accountDebitUrl)
+            .set('Authorization', token)
+            .send({
+                amount: 900000
+            })
+            .end((err, res) => {
+                expect(res).to.have.status(400);
+                expect(res.body).to.be.a('object');
+                expect(res.body.status).to.equal(400);
+                expect(res.body).to.have.property('error');
+                expect(res.body.error).to.equal('Insufficient Balance')
+                done();
+            });
+        });
+    });
+
     it('should not debit account when amount is empty', (done) => {
         chai.request(app)
             .post(signInUrl)
@@ -654,6 +681,29 @@ describe('Test for endpoint to get accounts using account status', () => {
                 expect(res.body).to.have.property('data');
                 expect(res.body.data).to.be.a('Array');
                 expect(res.body.data[0].status).to.equal('dormant');
+                done();
+            });
+        });
+    });
+});
+
+describe('Test for wrong route', () => {
+    it('should see a custom error message when hitting wrong route', (done) => {
+        chai.request(app)
+            .post(signInUrl)
+            .send({
+                email: 'hadeneekeh01@gmail.com',
+                password: 'password',
+            })
+            .end((loginErr, loginRes) => {
+                const token = `Bearer ${loginRes.body.data.token}`;
+            
+            chai.request(app)
+            .get(`/api/v1/account`)
+            .set('Authorization', token)
+            .end((err, res) => {
+                expect(res).to.have.status(404);
+                expect(res.body.msg).to.equal('Wrong URL!!! The page can not be found');
                 done();
             });
         });

@@ -45,7 +45,6 @@ const transactions = {
             });
         } 
         catch (error) {
-            console.log(error);
             if(error.code === '23514') {
                 return res.status(400).json({
                     status: res.statusCode,
@@ -99,8 +98,6 @@ const transactions = {
             });
         }        
         catch (error) {
-            console.log(error);
-
             return res.status(400).json({
                 status: res.statusCode,
                 error: error

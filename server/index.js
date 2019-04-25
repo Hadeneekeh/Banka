@@ -24,7 +24,9 @@ app.use('/api/v1/transactions', transactionWithDB);
 
 
 app.use('*', (req, res) => {
-    res.status(404).send('Wrong URL!!! The page can not be found');
+    res.status(404).json({
+        msg: 'Wrong URL!!! The page can not be found'
+});
 });
 
 app.listen(port, () => console.log(`Server is running on PORT ${port}`));
