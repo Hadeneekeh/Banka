@@ -7,7 +7,8 @@ module.exports = {
   },
   "rules": {
     "no-console": 0,
-    "consistent-return": 0
+    "consistent-return": 0,
+    "linebreak-style": ["error", "windows"],
   }
  };
 
