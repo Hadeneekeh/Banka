@@ -1,6 +1,7 @@
 import helper from '../auth/auth';
 import db from '../../db';
 import createUserQuery from '../migration/queries';
+import moment from 'moment';
 
 const User = {
     async signupUser(req, res) {
@@ -77,7 +78,48 @@ const User = {
                 status: res.statusCode,
                 error: 'Ensure your inputs are correct'
             })
-        } 
+        };
+    },
+
+    async createStaff(req, res) {
+        try {
+            const hashPassword = helper.hashPassword(req.body.password);
+
+
+        const values = [
+            req.body.firstName,
+            req.body.lastName,
+            req.body.email,
+            hashPassword,
+            req.body.type,
+            req.body.isAdmin,
+            moment(new Date())
+        ];
+            const { rows } = await db.query(createUserQuery.users.createStaff, values);
+ 
+            return res.status(201).json(
+            {
+                status: res.statusCode,
+                data: {
+                    id: rows[0].id,
+                    firstName: rows[0].firstname,
+                    lastName: rows[0].lastname,
+                    email: rows[0].email,
+                    userType: rows[0].type,
+                    createdOn: rows[0].registeredon
+                }
+            })
+        } catch (error) 
+        
+        {console.log(error);
+            if(error.routine === '_bt_check_unique') {
+                return res.status(400).json({
+                    status: 400,
+                    error: 'Email already exist'
+                });
+            } 
+            return res.status(400).send(error);
+        }
     }
 }
 

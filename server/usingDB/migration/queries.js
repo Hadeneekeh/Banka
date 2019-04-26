@@ -3,6 +3,7 @@
         createUser:  'INSERT INTO users(firstName, lastName, email, hashpassword)VALUES($1, $2, $3, $4)RETURNING *',
         loginUser: 'SELECT * FROM users WHERE email = $1',
         findUser: `SELECT * FROM users WHERE email=$1`,
+        createStaff: 'INSERT INTO users(firstName, lastName, email, hashpassword, type, isAdmin, registeredOn)VALUES($1, $2, $3, $4, $5, $6, $7)RETURNING *'
       },
 
       accounts: {
