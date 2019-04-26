@@ -115,7 +115,7 @@ const transactions = {
       const result = await db.query(transactionQuery.transactions.findAtransaction, [req.params.transactionId]);
       console.log(result);
 
-      if (!result[0]) {
+      if (result[0]) {
         return res.status(404).json({
           status: res.statusCode,
           error: 'The transaction ID does not exist',
