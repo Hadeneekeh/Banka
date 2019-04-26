@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
 import pool from '../../db';
 
 
-  async function create() { 
-      try {
-        const usersTable = await pool.query(`CREATE TABLE IF NOT EXISTS users(
+async function create() {
+  try {
+    const usersTable = await pool.query(`CREATE TABLE IF NOT EXISTS users(
           id SERIAL PRIMARY KEY,
           firstName TEXT NOT NULL,
           lastName TEXT NOT NULL,
@@ -14,7 +15,7 @@ import pool from '../../db';
           registeredOn TIMESTAMP
           )`);
 
-        const accountsTable = await pool.query(`CREATE TABLE IF NOT EXISTS accounts(
+    const accountsTable = await pool.query(`CREATE TABLE IF NOT EXISTS accounts(
           id SERIAL PRIMARY KEY,
           accountNumber NUMERIC UNIQUE NOT NULL,
           createdOn TIMESTAMP,
@@ -25,7 +26,7 @@ import pool from '../../db';
           FOREIGN KEY (owner) REFERENCES users (id) ON DELETE CASCADE
           )`);
 
-        const transactionsTable = await pool.query(`CREATE TABLE IF NOT EXISTS transactions(
+    const transactionsTable = await pool.query(`CREATE TABLE IF NOT EXISTS transactions(
           id SERIAL PRIMARY KEY,
           createdOn TIMESTAMP NOT NULL,
           type TEXT NOT NULL,
@@ -35,11 +36,9 @@ import pool from '../../db';
           oldBalance NUMERIC (100, 2) NOT NULL,
           newBalance NUMERIC (100, 2) NOT NULL
           )`);
-         
-          
-      } catch (error) {
-           console.log(error);
-      }
+  } catch (error) {
+    console.log(error);
   }
+}
 
-  create();
+create();
