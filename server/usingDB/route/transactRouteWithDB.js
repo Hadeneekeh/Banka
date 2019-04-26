@@ -1,7 +1,7 @@
 import express from 'express';
 import transactionController from '../controllers/transaction-controller';
 import authorize from '../middleware/userAuthorization';
-import { transactionValidation } from '../middleware/transactValidation'
+import transactionValidation from '../middleware/transactValidation';
 
 const transactionRoute = express.Router();
 
