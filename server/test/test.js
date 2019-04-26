@@ -703,3 +703,29 @@ describe('Test for endpoint to get accounts using account status', () => {
       });
   });
 });
+
+describe('Test for get a specific account endpoint', () => {
+  it('should display the transaction details of a specific account', (done) => {
+    chai.request(app)
+      .post(signInUrl)
+      .send({
+        email: 'test@banka.com',
+        password: 'password',
+      })
+      .end((loginErr, loginRes) => {
+        const token = `Bearer ${loginRes.body.data.token}`;
+
+        chai.request(app)
+          .get('/api/v1/transactions/3')
+          .set('Authorization', token)
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(200);
+            expect(res.body).to.have.property('data');
+            expect(res.body.data).to.be.a('Object');
+            done();
+          });
+      });
+  });
+});

@@ -109,6 +109,37 @@ const transactions = {
       });
     }
   },
+
+  async viewATransaction(req, res) {
+    try {
+      const result = await db.query(transactionQuery.transactions.findAtransaction, [req.params.transactionId]);
+      console.log(result);
+
+      if (result[0]) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'The transaction ID does not exist',
+        });
+      }
+      const { rows } = await db.query(transactionQuery.transactions.getAtransaction, [req.params.transactionId]);
+
+      return res.status(200).json({
+        status: res.statusCode,
+        data: {
+          transactionId: rows[0].id,
+          createdOn: rows[0].createdon,
+          type: rows[0].type,
+          amount: rows[0].amount,
+          oldBalance: rows[0].oldbalance,
+          newBalance: rows[0].newbalance,
+        },
+      });
+    } catch (error) {
+      console.log(error);
+
+      return res.status(400).send(error);
+    }
+  },
 };
 
 export default transactions;
