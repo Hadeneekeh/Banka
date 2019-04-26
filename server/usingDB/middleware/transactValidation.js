@@ -1,4 +1,4 @@
-import { check, validationResult } from 'express-validator/check';
+import { check, validationResult, param } from 'express-validator/check';
 
 const transactionValidation = [
 
@@ -29,5 +29,11 @@ const transactionValidation = [
   },
 ];
 
+const transIdValidation = [
+  param('transactionId').not().isEmpty().withMessage('Transaction ID can not be empty')
+    .isNumeric()
+    .withMessage('Transaction ID must be an integer'),
+];
 
-export default transactionValidation;
+
+export { transactionValidation, transIdValidation };
