@@ -23,7 +23,7 @@ const verification = {
       const decode = usersVerification.verifyToken(token);
       req.user = decode;
 
-      if (!req.user.rows[0].isadmin) {
+      if (!req.user.isadmin) {
         return res.status(401).send({
           status: res.statusCode,
           error: 'Unauthorized',
@@ -44,7 +44,7 @@ const verification = {
       const decode = usersVerification.verifyToken(token);
       req.user = decode;
 
-      if (req.user.rows[0].type !== 'cashier') {
+      if (req.user.type !== 'cashier') {
         return res.status(401).json({
           status: res.statusCode,
           error: 'Unauthorized',

@@ -28,7 +28,7 @@ const transactions = {
         moment(new Date()),
         'debit',
         accountNumber,
-        req.user.rows[0].id,
+        req.user.id,
         amount,
         oldBalance,
         newBalance,
@@ -42,7 +42,7 @@ const transactions = {
             transactionId: result.rows[0].id,
             accountNumber: result.rows[0].accountnumber,
             amount: result.rows[0].amount,
-            cashier: req.user.rows[0].id,
+            cashier: req.user.id,
             transactionType: result.rows[0].type,
             accountBalance: result.rows[0].newbalance,
           },
@@ -81,7 +81,7 @@ const transactions = {
         moment(new Date()),
         'credit',
         accountNumber,
-        req.user.rows[0].id,
+        req.user.id,
         amount,
         oldBalance,
         newBalance,
@@ -96,7 +96,7 @@ const transactions = {
             transactionId: result.rows[0].id,
             accountNumber: result.rows[0].accountnumber,
             amount: result.rows[0].amount,
-            cashier: req.user.rows[0].id,
+            cashier: req.user.id,
             transactionType: result.rows[0].type,
             accountBalance: result.rows[0].newbalance,
           },
@@ -113,7 +113,6 @@ const transactions = {
   async viewATransaction(req, res) {
     try {
       const result = await db.query(transactionQuery.transactions.findAtransaction, [req.params.transactionId]);
-      console.log(result);
 
       if (result[0]) {
         return res.status(404).json({
@@ -135,8 +134,6 @@ const transactions = {
         },
       });
     } catch (error) {
-      console.log(error);
-
       return res.status(400).send(error);
     }
   },

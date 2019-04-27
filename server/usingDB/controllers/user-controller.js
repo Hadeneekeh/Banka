@@ -1,36 +1,25 @@
 import moment from 'moment';
 import helper from '../auth/auth';
-import db from '../../db';
-import createUserQuery from '../migration/queries';
+import user from '../model/user-model';
 
-const User = {
+const createUser = {
   async signupUser(req, res) {
-    // const newUser = {...req.body};
-
     const hashPassword = helper.hashPassword(req.body.password);
-
-
-    const values = [
-      req.body.firstName,
-      req.body.lastName,
-      req.body.email,
-      hashPassword,
-    ];
+    const values = [req.body.firstName, req.body.lastName, req.body.email, hashPassword];
 
     try {
-      const { rows } = await db.query(createUserQuery.users.createUser, values);
-      const token = await helper.generateToken({
-        id: rows[0].id, email: rows[0].email, isAdmin: rows[0].isadmin, type: rows[0].type,
-      });
+      const result = await user.signUp(values);
+      const token = await helper.generateToken(result[0]);
+
       return res.status(201).json(
         {
           status: res.statusCode,
           data: {
             token,
-            id: rows[0].id,
-            firstName: rows[0].firstname,
-            lastName: rows[0].lastname,
-            email: rows[0].email,
+            id: result[0].id,
+            firstName: result[0].firstname,
+            lastName: result[0].lastname,
+            email: result[0].email,
           },
         },
       );
@@ -46,14 +35,13 @@ const User = {
   },
 
   async signinUser(req, res) {
+    const values = [req.body.email];
     try {
-      const { rows } = await db.query(createUserQuery.users.loginUser, [req.body.email]);
+      const result = await user.signIn(values);
+      const token = await helper.generateToken(result.rows[0]);
 
 
-      const token = await helper.generateToken({ rows });
-
-
-      if (!helper.comparePassword(req.body.password, rows[0].hashpassword)) {
+      if (!helper.comparePassword(req.body.password, result.rows[0].hashpassword)) {
         return res.status(401).json({
           status: res.statusCode,
           error: 'Incorrect password',
@@ -61,21 +49,18 @@ const User = {
       }
 
       return res.status(200).json(
-
         {
           status: res.statusCode,
           data: {
             token,
-            id: rows[0].id,
-            firstName: rows[0].firstname,
-            lastName: rows[0].lastname,
-            email: rows[0].email,
+            id: result.rows[0].id,
+            firstName: result.rows[0].firstname,
+            lastName: result.rows[0].lastname,
+            email: result.rows[0].email,
           },
         },
       );
     } catch (error) {
-      console.log(error);
-
       return res.status(400).json({
         status: res.statusCode,
         error: 'Ensure your inputs are correct',
@@ -85,9 +70,7 @@ const User = {
 
   async createStaff(req, res) {
     try {
-      const hashPassword = helper.hashPassword(req.body.password);
-
-
+      const hashPassword = await helper.hashPassword(req.body.password);
       const values = [
         req.body.firstName,
         req.body.lastName,
@@ -97,23 +80,23 @@ const User = {
         req.body.isAdmin,
         moment(new Date()),
       ];
-      const { rows } = await db.query(createUserQuery.users.createStaff, values);
+      // const { rows } = await db.query(createUserQuery.users.createStaff, values);
+      const created = await user.createNewUser(values);
 
       return res.status(201).json(
         {
           status: res.statusCode,
           data: {
-            id: rows[0].id,
-            firstName: rows[0].firstname,
-            lastName: rows[0].lastname,
-            email: rows[0].email,
-            userType: rows[0].type,
-            createdOn: rows[0].registeredon,
+            id: created.rows[0].id,
+            firstName: created.rows[0].firstname,
+            lastName: created.rows[0].lastname,
+            email: created.rows[0].email,
+            userType: created.rows[0].type,
+            createdOn: created.rows[0].registeredon,
           },
         },
       );
     } catch (error) {
-      console.log(error);
       if (error.routine === '_bt_check_unique') {
         return res.status(400).json({
           status: 400,
@@ -126,4 +109,4 @@ const User = {
 };
 
 
-export default User;
+export default createUser;
