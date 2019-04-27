@@ -156,6 +156,29 @@ const accounts = {
       return res.status(400).send(error);
     }
   },
+
+  async viewTransactionHistory(req, res) {
+    try {
+      const result = await db.query(accountQuery.transactions.getAllTransactions, [req.params.accountNumber]);
+
+      if (result.rowCount < 1) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Transaction not found',
+        });
+      }
+
+      return res.status(200).json({
+        status: res.statusCode,
+        data: result.rows,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
+    }
+  },
 };
 
 export default accounts;

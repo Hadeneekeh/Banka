@@ -13,6 +13,7 @@ dbAcctRoute.delete('/accounts/:accountNumber', authorize.checkAdmin, dbAcctContr
 dbAcctRoute.get('/accounts', statusCheck, authorize.checkAdmin, dbAcctController.getAccount);
 dbAcctRoute.get('/accounts/:accountNumber', authorize.checkUser, dbAcctController.viewAnAccount);
 dbAcctRoute.get('/user/:userEmailAddress/accounts', authorize.checkAdmin, dbAcctController.viewAcctByEmail);
+dbAcctRoute.get('/accounts/:accountNumber/transactions', dbAcctController.viewTransactionHistory);
 
 
 export default dbAcctRoute;
