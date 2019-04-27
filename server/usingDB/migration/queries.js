@@ -23,6 +23,7 @@ const queries = {
     createTransaction: 'INSERT INTO transactions(createdOn, type, accountNumber, cashier, amount, oldBalance, newBalance)VALUES($1, $2, $3, $4, $5, $6, $7)RETURNING *',
     getAtransaction: 'SELECT transactions.id, transactions.createdon, transactions.type, transactions.accountnumber, transactions.amount, transactions.oldbalance, transactions.newbalance FROM transactions WHERE id=$1',
     findAtransaction: 'SELECT transactions.id FROM transactions WHERE id=$1',
+    getAllTransactions: 'SELECT transactions.id, transactions.createdon, transactions.type, transactions.accountnumber, transactions.amount, transactions.oldbalance, transactions.newbalance FROM transactions WHERE accountNumber=$1',
   },
 };
 export default queries;
