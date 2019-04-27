@@ -6,7 +6,7 @@ module.exports = {
     "mocha": true
   },
   "rules": {
-    "no-console": 0,
+    "no-console": 2,
     "consistent-return": 0,
     "linebreak-style": ["error", "windows"],
   }

@@ -6,11 +6,10 @@ import accountQuery from '../migration/queries';
 const accounts = {
   async createAccount(req, res) {
     const accountNumber = Math.floor(Math.random() * 9000000000) + 1000000000;
-
     const values = [
       accountNumber,
       moment(new Date()),
-      req.user.rows[0].id,
+      req.user.id,
       req.body.type,
     ];
 
@@ -23,9 +22,9 @@ const accounts = {
         status: 201,
         data: {
           accountNumber: rows[0].accountnumber,
-          firstName: req.user.rows[0].firstname,
-          lastName: req.user.rows[0].lastname,
-          email: req.user.rows[0].email,
+          firstName: req.user.firstname,
+          lastName: req.user.lastname,
+          email: req.user.email,
           type: req.body.type,
           openingBalance: rows[0].balance,
         },
@@ -124,7 +123,7 @@ const accounts = {
           {
             createdOn: rows[0].createdon,
             accountNumber: rows[0].accountnumber,
-            ownerEmail: req.user.rows[0].email,
+            ownerEmail: req.user.email,
             type: rows[0].type,
             status: rows[0].status,
             balance: rows[0].balance,
