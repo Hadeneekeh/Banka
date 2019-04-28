@@ -1,13 +1,19 @@
 import usersVerification from '../auth/auth';
 
+const authenticate = (req) => {
+  const token = req.headers.authorization.split(' ')[1];
+  const decode = usersVerification.verifyToken(token);
+  req.user = decode;
+
+  return req.user;
+};
+
 const verification = {
 // Checks if the token is for a user
 
-  checkUser(req, res, next) {
+  verifyUser(req, res, next) {
     try {
-      const token = req.headers.authorization.split(' ')[1];
-      const decode = usersVerification.verifyToken(token);
-      req.user = decode;
+      authenticate(req);
       return next();
     } catch (error) {
       return res.status(401).send({
@@ -16,13 +22,11 @@ const verification = {
       });
     }
   },
-  // Check if the token is for an Admin
-  checkAdmin(req, res, next) {
-    try {
-      const token = req.headers.authorization.split(' ')[1];
-      const decode = usersVerification.verifyToken(token);
-      req.user = decode;
 
+  // Check if the token is for an Admin
+  verifyAdmin(req, res, next) {
+    try {
+      authenticate(req);
       if (!req.user.isadmin) {
         return res.status(401).send({
           status: res.statusCode,
@@ -37,12 +41,11 @@ const verification = {
       });
     }
   },
+
   // Checks if the token is for Cashier
-  checkCashier(req, res, next) {
+  verifyCashier(req, res, next) {
     try {
-      const token = req.headers.authorization.split(' ')[1];
-      const decode = usersVerification.verifyToken(token);
-      req.user = decode;
+      authenticate(req);
 
       if (req.user.type !== 'cashier') {
         return res.status(401).json({

@@ -30,7 +30,10 @@ const createUser = {
           error: 'Email already exist',
         });
       }
-      return res.status(400).send(error);
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 
@@ -38,8 +41,15 @@ const createUser = {
     const values = [req.body.email];
     try {
       const result = await user.signIn(values);
-      const token = await helper.generateToken(result.rows[0]);
 
+      if (result.rowCount < 1) {
+        return res.status(401).json({
+          status: res.statusCode,
+          error: 'Enter a registered email address',
+        });
+      }
+
+      const token = await helper.generateToken(result.rows[0]);
 
       if (!helper.comparePassword(req.body.password, result.rows[0].hashpassword)) {
         return res.status(401).json({
@@ -61,9 +71,9 @@ const createUser = {
         },
       );
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         status: res.statusCode,
-        error: 'Ensure your inputs are correct',
+        error: 'Internal error',
       });
     }
   },
@@ -103,7 +113,10 @@ const createUser = {
           error: 'Email already exist',
         });
       }
-      return res.status(400).send(error);
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 };

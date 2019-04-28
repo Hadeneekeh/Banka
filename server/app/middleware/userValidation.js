@@ -42,8 +42,6 @@ const signInValidation = [
   check('password').not().isEmpty().withMessage('Password can not be empty'),
 
   (req, res, next) => {
-    console.log(req.body.email);
-
     const errors = validationResult(req);
     const errorMessages = [];
 

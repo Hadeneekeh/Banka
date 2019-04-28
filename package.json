@@ -11,10 +11,10 @@
     "heroku-postbuild": "npm run build",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
     "coveralls": "nyc --reporter=lcov --reporter=text-lcov npm test",
-    "create": "babel-node server/usingDB/migration/createTable.js",
-    "drop": "babel-node server/usingDB/migration/dropTable.js",
+    "create": "babel-node server/app/migration/createTable.js",
+    "drop": "babel-node server/app/migration/dropTable.js",
     "migrate": "npm run drop && npm run create && npm run seeding",
-    "seeding": "babel-node server/usingDB/migration/seed.js"
+    "seeding": "babel-node server/app/migration/seed.js"
   },
   "repository": {
     "type": "git",

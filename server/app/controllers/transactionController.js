@@ -10,7 +10,7 @@ const transactions = {
     try {
       const { accountNumber } = req.params;
       const amount = parseInt(req.body.amount);
-      const { rows } = await db.query(transactionQuery.accounts.findAnAccount, [accountNumber]);
+      const { rows } = await db.query(transactionQuery.accounts.getAnAccount, [accountNumber]);
 
       if (!rows[0]) {
         return res.status(404).json({
@@ -55,6 +55,10 @@ const transactions = {
           error: 'Insufficient Balance',
         });
       }
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 
@@ -62,7 +66,7 @@ const transactions = {
     try {
       const { accountNumber } = req.params;
       const amount = parseFloat(req.body.amount);
-      const { rows } = await db.query(transactionQuery.accounts.findAnAccount, [accountNumber]);
+      const { rows } = await db.query(transactionQuery.accounts.getAnAccount, [accountNumber]);
 
       if (!rows[0]) {
         return res.status(404).json({
@@ -103,24 +107,24 @@ const transactions = {
         ],
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         status: res.statusCode,
-        error,
+        error: 'Internal error',
       });
     }
   },
 
   async viewATransaction(req, res) {
     try {
-      const result = await db.query(transactionQuery.transactions.findAtransaction, [req.params.transactionId]);
+      const result = await db.query(transactionQuery.transactions.findAtransaction, [req.params.transactionId, req.user.id]);
 
-      if (result[0]) {
+      if (result.rowCount < 1) {
         return res.status(404).json({
           status: res.statusCode,
-          error: 'The transaction ID does not exist',
+          error: 'Transaction not found',
         });
       }
-      const { rows } = await db.query(transactionQuery.transactions.getAtransaction, [req.params.transactionId]);
+      const { rows } = await db.query(transactionQuery.transactions.getAtransaction, [req.params.transactionId, req.user.id]);
 
       return res.status(200).json({
         status: res.statusCode,
@@ -128,13 +132,17 @@ const transactions = {
           transactionId: rows[0].id,
           createdOn: rows[0].createdon,
           type: rows[0].type,
+          accountNumber: rows[0].accountnumber,
           amount: rows[0].amount,
           oldBalance: rows[0].oldbalance,
           newBalance: rows[0].newbalance,
         },
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 };

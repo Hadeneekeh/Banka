@@ -30,17 +30,16 @@ const accounts = {
         },
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         status: res.statusCode,
-        error,
+        error: 'Internal error',
       });
     }
   },
 
   async updateAccount(req, res) {
     try {
-      const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber]);
-
+      const { rows } = await db.query(accountQuery.accounts.getAnAccount, [req.params.accountNumber]);
 
       if (!rows[0]) {
         return res.status(404).json({
@@ -61,9 +60,9 @@ const accounts = {
         ],
       });
     } catch (error) {
-      return res.status(404).json({
+      return res.status(500).json({
         status: res.statusCode,
-        error: 'Check your input',
+        error: 'Internal error',
       });
     }
   },
@@ -84,9 +83,9 @@ const accounts = {
         message: 'Account successfully deleted',
       });
     } catch (error) {
-      return res.status(404).json({
+      return res.status(500).json({
         status: res.statusCode,
-        error: 'Check your input',
+        error: 'Internal error',
       });
     }
   },
@@ -108,13 +107,22 @@ const accounts = {
         data: rows,
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 
   async viewAnAccount(req, res) {
     try {
-      const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber]);
+      const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber, req.user.id]);
+      if (!rows) {
+        return res.status(404).json({
+          ststus: res.statusCode,
+          error: 'Account number can not be found',
+        });
+      }
 
 
       return res.status(200).json({
@@ -131,7 +139,10 @@ const accounts = {
         ],
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 
@@ -153,13 +164,16 @@ const accounts = {
         accounts: rows,
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 
   async viewTransactionHistory(req, res) {
     try {
-      const result = await db.query(accountQuery.transactions.getAllTransactions, [req.params.accountNumber]);
+      const result = await db.query(accountQuery.transactions.getAllTransactions, [req.params.accountNumber, req.user.id]);
 
       if (result.rowCount < 1) {
         return res.status(404).json({
