@@ -55,6 +55,10 @@ const transactions = {
           error: 'Insufficient Balance',
         });
       }
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 
@@ -103,9 +107,9 @@ const transactions = {
         ],
       });
     } catch (error) {
-      return res.status(400).json({
+      return res.status(500).json({
         status: res.statusCode,
-        error,
+        error: 'Internal error',
       });
     }
   },
@@ -134,7 +138,10 @@ const transactions = {
         },
       });
     } catch (error) {
-      return res.status(400).send(error);
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
     }
   },
 };

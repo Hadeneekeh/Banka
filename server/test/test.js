@@ -208,9 +208,9 @@ describe('Test for User signIn controller', () => {
         password: 'password',
       })
       .end((err, res) => {
-        expect(res).to.have.status(400);
+        expect(res).to.have.status(401);
         expect(res.body).to.be.a('object');
-        expect(res.body.status).to.equal(400);
+        expect(res.body.status).to.equal(401);
         expect(res.body).to.have.property('error');
         done();
       });
