@@ -115,6 +115,7 @@ footer {
     margin-top: 200px;
     margin-bottom: 0;
     padding: 5px;
+    width: 100%;
 }
 #signUpForm-container {
     display: flex;
