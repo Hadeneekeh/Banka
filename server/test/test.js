@@ -709,7 +709,7 @@ describe('Test for get a specific account endpoint', () => {
     chai.request(app)
       .post(signInUrl)
       .send({
-        email: 'test@banka.com',
+        email: 'ade.banke@example.com',
         password: 'password',
       })
       .end((loginErr, loginRes) => {

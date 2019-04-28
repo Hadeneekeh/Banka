@@ -39,8 +39,7 @@ const accounts = {
 
   async updateAccount(req, res) {
     try {
-      const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber]);
-
+      const { rows } = await db.query(accountQuery.accounts.getAnAccount, [req.params.accountNumber]);
 
       if (!rows[0]) {
         return res.status(404).json({
@@ -117,7 +116,13 @@ const accounts = {
 
   async viewAnAccount(req, res) {
     try {
-      const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber]);
+      const { rows } = await db.query(accountQuery.accounts.findAnAccount, [req.params.accountNumber, req.user.id]);
+      if (!rows) {
+        return res.status(404).json({
+          ststus: res.statusCode,
+          error: 'Account number can not be found',
+        });
+      }
 
 
       return res.status(200).json({
@@ -168,7 +173,7 @@ const accounts = {
 
   async viewTransactionHistory(req, res) {
     try {
-      const result = await db.query(accountQuery.transactions.getAllTransactions, [req.params.accountNumber]);
+      const result = await db.query(accountQuery.transactions.getAllTransactions, [req.params.accountNumber, req.user.id]);
 
       if (result.rowCount < 1) {
         return res.status(404).json({
