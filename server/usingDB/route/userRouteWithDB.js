@@ -7,6 +7,6 @@ const dbUserRoute = express.Router();
 
 dbUserRoute.post('/signup', signUpValidation, dbUserController.signupUser);
 dbUserRoute.post('/signin', signInValidation, dbUserController.signinUser);
-dbUserRoute.post('/create', authorize.checkAdmin, createStafValidation, dbUserController.createStaff);
+dbUserRoute.post('/create', createStafValidation, authorize.verifyAdmin, dbUserController.createStaff);
 
 export default dbUserRoute;

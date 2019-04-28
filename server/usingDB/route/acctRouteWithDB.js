@@ -7,13 +7,13 @@ import { accountTypeValidation, accountStatusValidation } from '../middleware/ac
 
 const dbAcctRoute = express.Router();
 
-dbAcctRoute.post('/accounts', accountTypeValidation, authorize.checkUser, dbAcctController.createAccount);
-dbAcctRoute.patch('/accounts/:accountNumber', accountStatusValidation, authorize.checkAdmin, dbAcctController.updateAccount);
-dbAcctRoute.delete('/accounts/:accountNumber', authorize.checkAdmin, dbAcctController.deleteAccount);
-dbAcctRoute.get('/accounts', statusCheck, authorize.checkAdmin, dbAcctController.getAccount);
-dbAcctRoute.get('/accounts/:accountNumber', authorize.checkUser, dbAcctController.viewAnAccount);
-dbAcctRoute.get('/user/:userEmailAddress/accounts', authorize.checkAdmin, dbAcctController.viewAcctByEmail);
-dbAcctRoute.get('/accounts/:accountNumber/transactions', dbAcctController.viewTransactionHistory);
+dbAcctRoute.post('/accounts', accountTypeValidation, authorize.verifyUser, dbAcctController.createAccount);
+dbAcctRoute.patch('/accounts/:accountNumber', accountStatusValidation, authorize.verifyAdmin, dbAcctController.updateAccount);
+dbAcctRoute.delete('/accounts/:accountNumber', authorize.verifyAdmin, dbAcctController.deleteAccount);
+dbAcctRoute.get('/accounts', statusCheck, authorize.verifyAdmin, dbAcctController.getAccount);
+dbAcctRoute.get('/accounts/:accountNumber', authorize.verifyUser, dbAcctController.viewAnAccount);
+dbAcctRoute.get('/user/:userEmailAddress/accounts', authorize.verifyAdmin, dbAcctController.viewAcctByEmail);
+dbAcctRoute.get('/accounts/:accountNumber/transactions', authorize.verifyUser, dbAcctController.viewTransactionHistory);
 
 
 export default dbAcctRoute;

@@ -6,9 +6,9 @@ import { transactionValidation, transIdValidation } from '../middleware/transact
 
 const transactionRoute = express.Router();
 
-transactionRoute.post('/:accountNumber/debit', transactionValidation, authorize.checkCashier, transactionController.debitAccount);
-transactionRoute.post('/:accountNumber/credit', transactionValidation, authorize.checkCashier, transactionController.creditAccount);
-transactionRoute.get('/:transactionId', transIdValidation, authorize.checkUser, transactionController.viewATransaction);
+transactionRoute.post('/:accountNumber/debit', transactionValidation, authorize.verifyCashier, transactionController.debitAccount);
+transactionRoute.post('/:accountNumber/credit', transactionValidation, authorize.verifyCashier, transactionController.creditAccount);
+transactionRoute.get('/:transactionId', transIdValidation, authorize.verifyUser, transactionController.viewATransaction);
 
 
 export default transactionRoute;
