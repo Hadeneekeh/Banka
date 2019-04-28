@@ -1,5 +1,5 @@
 import {
-  check, validationResult, oneOf,
+  check, validationResult, oneOf, param,
 } from 'express-validator/check';
 
 const accountTypeValidation = [
@@ -55,58 +55,21 @@ const accountStatusValidation = [
   },
 ];
 
-// const queryValidation1 = [
-//   query('status').not().isEmpty().withMessage('Account status can not be empty'),
-//   oneOf([
-//     query('status').equals('active'),
-//     query('status').equals('dormant'),
-//   ], 'Account query can only be \'Active\' or \'Dormant\''),
+const emailValidation = [
+  param('userEmailAddress').not().isEmpty().withMessage('Email Address can not be empty')
+    .isEmail()
+    .withMessage('Input a valid email address'),
+];
 
-//   (req, res, next) => {
-//     const errors = validationResult(req);
-//     const errorMessages = [];
+const acctNumberValidation = [
+  param('accountNumber').not().isEmpty().withMessage('Account Number can not be empty')
+    .isNumeric()
+    .withMessage('Account Number must be a number')
+    .isLength({ min: 10, max: 10 })
+    .withMessage('Account Number must be \'10\' digit'),
+];
 
-//     if (!errors.isEmpty()) {
-//       errors.array().forEach((error) => {
-//         errorMessages.push(error.msg);
-//       });
 
-//       return res.status(400).json({
-//         status: 400,
-//         error: errorMessages,
-//       });
-//     }
-
-//     return next();
-//   },
-// ];
-
-// const queryValidation2 = [
-//   query('status').isEmpty(),
-
-//   (req, res, next) => {
-//     const errors = validationResult(req);
-//     const errorMessages = [];
-
-//     if (!errors.isEmpty()) {
-//       errors.array().forEach((error) => {
-//         errorMessages.push(error.msg);
-//       });
-
-//       return res.status(400).json({
-//         status: 400,
-//         error: errorMessages,
-//       });
-//     }
-
-//     return next();
-//   },
-// ];
-
-// const queryValidate = () => {
-//   const isQuery = req.query.status;
-//   const validation = isQuery ? queryValidation1 : queryValidation2;
-//   return validation;
-// };
-
-export { accountTypeValidation, accountStatusValidation };
+export {
+  accountTypeValidation, accountStatusValidation, acctNumberValidation, emailValidation,
+};
