@@ -1,6 +1,6 @@
 /* eslint-disable import/named */
 import express from 'express';
-import transactionController from '../controllers/transaction-controller';
+import transactionController from '../controllers/transactionController';
 import authorize from '../middleware/userAuthorization';
 import { transactionValidation, transIdValidation } from '../middleware/transactValidation';
 import { acctNumberValidation } from '../middleware/accountValidation';
