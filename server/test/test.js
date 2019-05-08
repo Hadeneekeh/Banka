@@ -451,9 +451,9 @@ describe('Test for the endpoint to debit an account', () => {
             amount: 900000,
           })
           .end((err, res) => {
-            expect(res).to.have.status(400);
+            expect(res).to.have.status(403);
             expect(res.body).to.be.a('object');
-            expect(res.body.status).to.equal(400);
+            expect(res.body.status).to.equal(403);
             expect(res.body).to.have.property('error');
             expect(res.body.error).to.equal('Insufficient Balance');
             done();

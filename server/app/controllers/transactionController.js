@@ -50,7 +50,7 @@ const transactions = {
       });
     } catch (error) {
       if (error.code === '23514') {
-        return res.status(400).json({
+        return res.status(403).json({
           status: res.statusCode,
           error: 'Insufficient Balance',
         });
