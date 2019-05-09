@@ -21,28 +21,31 @@
     <main>
         <section id="signUpForm-container">
             <div id="signUp-form">
-                <form action="">
+                    <div id="errorContainer"></div>
+
+                <form id="signup" action="">
                     <h3 class="h3">Sign Up Form</h3>
                 
-                    <input type="text" name="firstname" placeholder="First Name" required>
+                    <input id="firstname" type="text" name="firstname" placeholder="First Name" required>
 
-                    <input type="text" name="lastname" placeholder="Last Name" required>
+                    <input id="lastname" type="text" name="lastname" placeholder="Last Name" required>
                         
-                    <input type="tel" name="phoneNumber" placeholder="Phone Number" required>
+                    <input id="phoneNumber" type="tel" name="phoneNumber" placeholder="Phone Number" required>
                         
-                    <input type="text" name="email" placeholder="Email Address" required> 
+                    <input id="email" type="text" name="email" placeholder="Email Address" required> 
                         
-                    <input type="password" name="password" placeholder="Password" required>
+                    <input id="password" type="password" name="password" placeholder="Password" required>
                         
-                    <input type="password" name="repeat-password" placeholder="Confirm password" required>
+                    <!-- <input type="password" name="repeat-password" placeholder="Confirm password" required> -->
                         
-                    <input type="submit" value="Sign Up">
+                    <input type="submit" id="signup-btn" value="Sign Up">
                 </form>
     
             </div>
         </section>
     </main>
     
-    <footer>Copyright &copy; Banka 2019</footer>
+    <!-- <footer>Copyright &copy; Banka 2019</footer> -->
+    <script src="../script/signup.js"></script>
 </body>
 </html>

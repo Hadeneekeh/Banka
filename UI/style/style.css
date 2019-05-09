@@ -98,7 +98,7 @@ input[type=submit]:hover, input[type=button]:hover {
     color: #f4f4ef;
     background-color: rgba(206, 206, 4, 0.891);
 }
-h3 {
+#intro h3 {
     color: #ffffff;
     line-height: 1.5em;
     background-color: rgba(30, 30, 27, 0.183);
