@@ -20,7 +20,7 @@ header {
     color: #0000ff;
     padding: 15px;
     display: flex;
-    flex-direction: column;
+    /* flex-direction: row; */
 }
 header a {
     color: #f4f4ef;
@@ -40,19 +40,22 @@ header ul {
 }
 header li {
     display: inline;
-    padding: 0 20px 0 20px;
+    padding: 0 15px 0 15px;
 }
 header #brand-name {
-    align-self: flex-start;
+    margin-top: 10px;
+    flex: 2 1 0;
+
 }
 header #brand-name h1 {
     margin: 0;
     font: 200 40px/0.4 'Great Vibes', Helvetica, sans-serif;
     text-shadow: 2px 3px 2px rgba(206, 206, 4, 0.741); 
 }
-header nav {
-    align-self: flex-end;
+header #nav {
     margin-top: 10px;
+    flex: 1 1 0;
+    flex-wrap: wrap;
 }
 /* #landing {
     display: flex;
@@ -61,13 +64,13 @@ header nav {
 #form-container {
     width: 300px;
 	height: 350px;
-	transform: skew(348deg);
-    border-left: 5px solid #f4f4ef;
+    border-top: 5px solid #f4f4ef;
     border-bottom: 5px solid #f4f4ef;
     padding: 10px;
     margin: 70px;
     background: rgba(206, 206, 4, 0.891);
     float: left;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 input[type=tel] {
     width: 45%;
@@ -95,12 +98,13 @@ input[type=submit]:hover, input[type=button]:hover {
     color: #f4f4ef;
     background-color: rgba(206, 206, 4, 0.891);
 }
-h3 {
-    color: #20232a;
+#intro h3 {
+    color: #ffffff;
     line-height: 1.5em;
+    background-color: rgba(30, 30, 27, 0.183);
 }
 #intro {
-    width: 300px;
+    width: 400px;
     float: right;
     text-align: center;
     margin-top: 60px;
@@ -149,7 +153,16 @@ footer {
 
 
 
-@media screen and (max-width: 760px) {
+@media screen and (min-width: 769px) and (max-width: 1464px) {
+    header {
+        flex-direction: column;
+    }
+    header #nav {
+        align-self: flex-end;
+    }
+}
+
+@media screen and (max-width: 768px) {
     .right-triangle {
         width: 0;
         height: 0;
@@ -157,8 +170,12 @@ footer {
         border-left: 10px solid #f4f4ef;
         border-bottom: 5px solid transparent;
     }
+    header {
+        flex-direction: column;
+    }
     header a {
         font-size: 12px;
+        padding: 5px;
     }
     header #brand-name h1 {
         font-size: 20px;
@@ -171,12 +188,14 @@ footer {
     #intro {
         float: none;
         width: 80%;
-        transform: skew(360deg);
         margin: 20px;
 
     }
-    header nav {
-        align-self: flex-end;
+    header #nav {
+        margin-top: 20px;
+    }
+    header li {
+        padding: 0 5px 0 5px;
     }
     #pswReset-container {
         display: flex;
