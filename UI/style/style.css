@@ -41,10 +41,11 @@ header ul {
 header li {
     display: inline;
     padding: 0 15px 0 15px;
+    margin-left: 350px;
 }
 header #brand-name {
     margin-top: 10px;
-    flex: 2 1 0;
+    flex: 1 1 0;
 
 }
 header #brand-name h1 {
@@ -54,7 +55,7 @@ header #brand-name h1 {
 }
 header #nav {
     margin-top: 10px;
-    flex: 1 1 0;
+    flex: 1 0 0;
     flex-wrap: wrap;
 }
 /* #landing {
@@ -193,9 +194,11 @@ footer {
     }
     header #nav {
         margin-top: 20px;
+        margin-left: 0;
     }
     header li {
         padding: 0 5px 0 5px;
+        margin-left: 0px;
     }
     #pswReset-container {
         display: flex;
@@ -206,5 +209,20 @@ footer {
         width: 50%;
         padding: 0 5px 0 10px;
         margin: 0 5px 5px 15px;
+    }
+}
+
+@media screen and (max-width: 448px) {
+    header {
+        display: inline;
+    }
+    header #nav {
+        margin-top: 20px;
+        margin-left: 0;
+    }
+    header li {
+        display: inline;
+        padding: 0 15px 0 15px;
+        margin-left: 0px;
     }
 }
