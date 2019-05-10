@@ -67,6 +67,7 @@ const createUser = {
             firstName: result.rows[0].firstname,
             lastName: result.rows[0].lastname,
             email: result.rows[0].email,
+            type: result.rows[0].type,
           },
         },
       );
