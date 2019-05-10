@@ -15,8 +15,6 @@
         <div id="nav">
             <nav>
                 <ul>
-                    <li><a href="./admin/manage-account.html">ADMIN PAGE</a></li>
-                    <li><a href="./cashier/debit-account.html">CASHIER PAGE</a></li>
                     <li><a href="./client/sign-up.html">SIGN UP</a></li>
                 </ul>
             </nav>
@@ -31,14 +29,15 @@
                     creation, customer deposit and withdrawals.</h3>
             </div>
             <div id="form-container">
-                <form action="">
+                <div id="errorContainer"></div>
+                <form id="signin" action="">
                     <p>Log on to Banka</p>
-                    <input type="text" name="email" placeholder="Enter your email address" required> 
+                    <input id="email" type="text" name="email" placeholder="Enter your email address" required> 
                     <br>
-                    <input type="password" name="password" placeholder="Enter your password" required>
+                    <input id="password" type="password" name="password" placeholder="Enter your password" required>
                     <br>
                     
-                    <a href="./client/client-dashboard.html"><input type="button" value="Login"></a>
+                    <a href="./client/client-dashboard.html"><input id="signin-btn" type="submit" value="Login"></a>
                     <br>
                     <a href="./client/reset-password.html">Forgotten Password?</a>
                 </form>
@@ -53,6 +52,6 @@
     </main>
 
     <!-- <footer>Copyright &copy; Banka 2019</footer> -->
-
+    <script src="./script/signin.js"></script>
 </body>
 </html>
