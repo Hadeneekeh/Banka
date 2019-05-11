@@ -37,15 +37,17 @@
 
                 
                     <div class="acctProcess">
-                        <form action="">
+                        <div id="errorContainer"></div>
+
+                        <form id="createAcct" action="">
                          <p>Select an account type then click on Create an Account</p>
                             <select name="accountType" id="accountType" required>
-                                <option value="">Choose an Account</option>
+                                <option selected disabled value="">Choose an Account</option>
                                 <option value="savings">Savings</option>
                                 <option value="current">Current</option>
                             </select>
                             <br>
-                            <input type="button" value="Create an Account" id="createAcct">
+                            <input type="submit" value="Create an Account" id="createAcct-btn">
                    
                          </form>
                     </div>
@@ -61,7 +63,8 @@
     </div>
     <footer>Copyright &copy; Banka 2019</footer>
 
-    <script src="../script/ui.js"></script>
+    <!-- <script src="../script/ui.js"></script> -->
     <script src="../script/clientProfile.js"></script>
+    <script src="../script/createAccount.js"></script>
 </body>
 </html>
