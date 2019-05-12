@@ -42,6 +42,7 @@ signin.addEventListener('submit', (event) => {
         }, 2000);
 
         localStorage.setItem('userInfo', JSON.stringify(response.data));
+        localStorage.setItem('token', JSON.stringify(response.data.token));
       }
       if (response.status === 400) {
         msgContainer.style.backgroundColor = 'white';

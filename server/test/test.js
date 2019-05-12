@@ -602,7 +602,7 @@ describe('Endpoint to view an account details', () => {
 });
 
 describe('Endpoint to get account by email', () => {
-  it('should display all accounts of a specific user', (done) => {
+  it('should display all accounts of a specific user when admin login', (done) => {
     chai.request(app)
       .post(signInUrl)
       .send({
@@ -614,6 +614,31 @@ describe('Endpoint to get account by email', () => {
 
         chai.request(app)
           .get(getAllAccountsByEmail)
+          .set('Authorization', token)
+          .end((err, res) => {
+            expect(res).to.have.status(200);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(200);
+            expect(res.body).to.have.property('accounts');
+            expect(res.body.accounts).to.be.a('Array');
+            expect(res.body.accounts[0]).to.be.a('Object');
+            done();
+          });
+      });
+  });
+
+  it('should display all accounts of a specific user when the user login', (done) => {
+    chai.request(app)
+      .post(signInUrl)
+      .send({
+        email: 'ade.banke@example.com',
+        password: 'password',
+      })
+      .end((loginErr, loginRes) => {
+        const token = `Bearer ${loginRes.body.data.token}`;
+
+        chai.request(app)
+          .get('/api/v1//user/accounts?email=ade.banke@example.com')
           .set('Authorization', token)
           .end((err, res) => {
             expect(res).to.have.status(200);
@@ -639,6 +664,30 @@ describe('Endpoint to get account by email', () => {
 
         chai.request(app)
           .get('/api/v1//user/ade.bank@example.com/accounts')
+          .set('Authorization', token)
+          .end((err, res) => {
+            expect(res).to.have.status(404);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(404);
+            expect(res.body).to.have.property('error');
+            expect(res.body.error).to.equal('Email does not exist');
+            done();
+          });
+      });
+  });
+
+  it('should not display accounts if the email is not for the signed in user', (done) => {
+    chai.request(app)
+      .post(signInUrl)
+      .send({
+        email: 'ade.banke@example.com',
+        password: 'password',
+      })
+      .end((loginErr, loginRes) => {
+        const token = `Bearer ${loginRes.body.data.token}`;
+
+        chai.request(app)
+          .get('/api/v1//user/accounts?email=bim.ridwan@example.com')
           .set('Authorization', token)
           .end((err, res) => {
             expect(res).to.have.status(404);
@@ -678,7 +727,7 @@ describe('Test for endpoint to get accounts using account status', () => {
       });
   });
 
-  it('should display active accounts when admin signs in', (done) => {
+  it('should display dormant accounts when admin signs in', (done) => {
     chai.request(app)
       .post(signInUrl)
       .send({

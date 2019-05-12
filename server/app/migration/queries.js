@@ -4,6 +4,7 @@ const queries = {
     loginUser: 'SELECT * FROM users WHERE email = $1',
     findUser: 'SELECT * FROM users WHERE email=$1',
     createStaff: 'INSERT INTO users(firstName, lastName, email, hashpassword, type, isAdmin, registeredOn)VALUES($1, $2, $3, $4, $5, $6, $7)RETURNING *',
+    findLoginUser: 'SELECT * FROM users JOIN accounts ON users.id = accounts.owner WHERE email=$1 AND accounts.owner=$2',
   },
 
   accounts: {
@@ -18,7 +19,8 @@ const queries = {
     getDormantAcct: `SELECT accounts.createdon, accounts.accountnumber, users.email, accounts.type, accounts.status, accounts.balance 
         FROM users JOIN accounts ON users.id = accounts.owner WHERE accounts.status=$1`,
     findAnAccount: 'SELECT * FROM accounts JOIN users ON accounts.owner = users.id WHERE accountNumber=$1 AND users.id=$2',
-
+    getAUserAcctByEmail: `SELECT accounts.accountnumber, accounts.createdon, accounts.type, accounts.status, accounts.balance 
+        FROM users JOIN accounts ON users.id = accounts.owner WHERE users.email=$1 AND accounts.owner=$2`,
   },
 
   transactions: {
