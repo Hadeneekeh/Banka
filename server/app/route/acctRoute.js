@@ -14,6 +14,7 @@ acctRoute.patch('/accounts/:accountNumber', acctNumberValidation, accountStatusV
 acctRoute.delete('/accounts/:accountNumber', acctNumberValidation, authorize.verifyAdmin, acctController.deleteAccount);
 acctRoute.get('/accounts', statusCheck, authorize.verifyAdmin, acctController.getAccount);
 acctRoute.get('/accounts/:accountNumber', acctNumberValidation, authorize.verifyUser, acctController.viewAnAccount);
+acctRoute.get('/user/accounts', emailValidation, authorize.verifyUser, acctController.userViewAcctByEmail);
 acctRoute.get('/user/:userEmailAddress/accounts', emailValidation, authorize.verifyAdmin, acctController.viewAcctByEmail);
 acctRoute.get('/accounts/:accountNumber/transactions', acctNumberValidation, authorize.verifyUser, acctController.viewTransactionHistory);
 

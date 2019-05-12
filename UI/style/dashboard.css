@@ -100,13 +100,13 @@ aside p {
 } */
 .acctOverview {
     display: flex;
-    /* flex-flow: row wrap; */
+    /* flex-flow: column wrap; */
     align-self: center;
     justify-content: space-around;
     margin: 5px 0 0 60px;
     text-align: center;
 }
-#acct1 {
+.acctDetails {
     width: 50%;
     margin: 8px 0 0 60px;
     padding: 20px;
@@ -114,15 +114,6 @@ aside p {
     color: #0000ff;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     align-self: flex-start;
-}
-#acct2 {
-    width: 50%;
-    margin: 8px 0 0 60px;
-    padding: 20px;
-    background: rgba(206, 206, 4, 0.891);
-    color: #0000ff;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    align-self: flex-end;
 }
 h2 {
     color: white;

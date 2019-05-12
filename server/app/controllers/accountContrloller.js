@@ -171,6 +171,31 @@ const accounts = {
     }
   },
 
+  async userViewAcctByEmail(req, res) {
+    try {
+      const findEmail = await db.query(accountQuery.users.findLoginUser, [req.query.email, req.user.id]);
+
+      if (findEmail.rowCount < 1) {
+        return res.status(404).json({
+          status: res.statusCode,
+          error: 'Email does not exist',
+        });
+      }
+
+      const { rows } = await db.query(accountQuery.accounts.getAUserAcctByEmail, [req.query.email, req.user.id]);
+
+      return res.status(200).json({
+        status: res.statusCode,
+        accounts: rows,
+      });
+    } catch (error) {
+      return res.status(500).json({
+        status: res.statusCode,
+        error: 'Internal error',
+      });
+    }
+  },
+
   async viewTransactionHistory(req, res) {
     try {
       const result = await db.query(accountQuery.transactions.getAllTransactions, [req.params.accountNumber, req.user.id]);
