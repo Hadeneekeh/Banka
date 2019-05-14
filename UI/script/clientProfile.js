@@ -37,9 +37,13 @@ const showAcctOverview = () => {
                         <h4>${account.status}</h4>
                         <p>Account Balance</p>
                         <h4>₦ ${account.balance}</h4>
+                        <botton class="transBtn" onclick="getTransaction('${account.accountnumber}')">View Transaction</botton>
                     </div>`;
         });
         acctOverview.innerHTML = acctDisp;
+      }
+      if (response.status === 404) {
+        acctOverview.innerHTML = '<h3>No Account found! Start by creating an account.</h3>';
       }
     })
     .catch((error) => {
@@ -48,6 +52,14 @@ const showAcctOverview = () => {
       msgContainer.innerHTML = 'Unable to connect' || error.message;
     });
 };
+
+
+// eslint-disable-next-line no-unused-vars
+const getTransaction = (accountNumber) => {
+  localStorage.setItem('accountNumber', accountNumber);
+  window.location = './transaction.html';
+};
+
 
 getProfileDettails();
 showAcctOverview();

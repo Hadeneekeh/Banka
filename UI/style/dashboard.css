@@ -268,6 +268,26 @@ td button {
     background: rgba(206, 206, 4, 0.891);
     color: #f4f4ef;
 }
+.transBtn {
+    background: #0000ff;
+    color: #f4f4ef;
+    font-size: 100%;
+    border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+.transBtn:hover {
+    background: #f4f4ef;
+    color: #0000ff;
+}
+#bold-message {
+    font-weight: bold;
+    color: #0000ff;
+    font-size: 15px;
+}
 
 
 
