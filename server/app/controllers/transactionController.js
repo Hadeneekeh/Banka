@@ -26,7 +26,7 @@ const transactions = {
 
       const values = [
         moment(new Date()),
-        'debit',
+        'Debit',
         accountNumber,
         req.user.id,
         amount,
@@ -83,7 +83,7 @@ const transactions = {
 
       const values = [
         moment(new Date()),
-        'credit',
+        'Credit',
         accountNumber,
         req.user.id,
         amount,
