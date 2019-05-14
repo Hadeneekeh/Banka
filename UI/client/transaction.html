@@ -35,11 +35,16 @@
                     </div>
             </aside>
             <div id="transTable">
+                    <div id="errorContainer">
+                        <!-- <p> Please, click <span id="bold-message">View Transaction Botton</span> on your Dashboard homepage to view Transaction History of a particular Account</p> -->
+                        <br>
+                    </div>
+                <div id="test"></div>
                     <table>
                         <caption>Transaction History</caption>
                         <thead>
                             <tr>
-                                <th>Transaction ID</th>
+                                <th>ID</th>
                                 <th>Created On</th>
                                 <th>Type</th>
                                 <th>Account Number</th>
@@ -50,37 +55,8 @@
                             </tr>
                         </thead>
 
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>17/03/2019 14:55</td>
-                                <td>Debit</td>
-                                <td>3120465978</td>
-                                <td>1001</td>
-                                <td>20,000.00</td>
-                                <td>170,000.85</td>
-                                <td>150,000.85</td>        
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>02/01/2019 09:55</td>
-                                <td>Credit</td>
-                                <td>3120465978</td>
-                                <td>1004</td>
-                                <td>70,000.00</td>
-                                <td>100,000.85</td>
-                                <td>170,000.85</td>        
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>28/12/2018 16:00</td>
-                                <td>Credit</td>
-                                <td>3120465978</td>
-                                <td>1019</td>
-                                <td>10,000.00</td>
-                                <td>90,000.85</td>
-                                <td>100,000.85</td>        
-                            </tr>            
+                        <tbody id="tbody">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -88,6 +64,7 @@
         </main>
     </div>
 
-    <script src="../script/clientProfile.js"></script>
+    <!-- <script src="../script/clientProfile.js"></script> -->
+    <script src="../script/transaction.js"></script>
 </body>    
 </html>
