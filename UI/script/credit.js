@@ -60,14 +60,7 @@ credit.addEventListener('submit', (event) => {
                 `;
         creditBtn.value = 'Credit';
       }
-      if (response.status === 403) {
-        msgContainer.style.display = 'block';
-        msgContainer.innerHTML = `${response.error}
-                <br>
-                <botton class="closeBtn" onclick="transactionCompleted()">Okay</botton>
-                `;
-        creditBtn.value = 'Credit';
-      }
+
       if (response.status === 400) {
         msgContainer.style.display = 'block';
         msgContainer.innerHTML = `${response.error}`;
@@ -88,6 +81,7 @@ credit.addEventListener('submit', (event) => {
       }, 5000);
     });
 });
+
 
 // eslint-disable-next-line no-unused-vars
 const transactionCompleted = () => {

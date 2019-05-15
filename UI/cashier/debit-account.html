@@ -35,22 +35,27 @@
                     </div>
             </aside>
 
-            <div class="acctProcess">
-                <h3>Initate Withdrawal</h3>
-                <form action="">
-                    <input type="number" name="acctNumber" id="acctNumber" placeholder="Account Number" required>
-                    <br>
-                    <input type="number" name="amount" id="amount" placeholder="Amount" required>
-                    <br>
-                    
-                    <input type="button" value="Debit">
-                </form>
+            <div class="transactionContainer">
+
+                <div class="msgContainer" id="msgContainer"></div>
+
+                <div class="acctProcess">
+                    <h3>Initiate Withdrawal</h3>
+                    <form action="" id="debit">
+                        <input type="number" name="acctNumber" id="acctNumber" placeholder="Account Number" required>
+                        <br>
+                        <input type="number" name="amount" id="amount" placeholder="Amount" required>
+                        <br>
+                        
+                        <input id="debit-btn" type="submit" value="Debit">
+                    </form>
+                </div>
             </div>
             </section>
         </main>
     </div>
     <footer>Copyright &copy; Banka 2019</footer>
 
-<script src="../script/clientProfile.js"></script>
+<script src="../script/debit.js"></script>
 </body>
 </html>
