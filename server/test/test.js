@@ -461,6 +461,32 @@ describe('Test for the endpoint to debit an account', () => {
       });
   });
 
+  it('should not debit account when account number is dormant', (done) => {
+    chai.request(app)
+      .post(signInUrl)
+      .send({
+        email: 'cashier@gmail.com',
+        password: 'password',
+      })
+      .end((loginErr, loginRes) => {
+        const token = `Bearer ${loginRes.body.data.token}`;
+
+        chai.request(app)
+          .post('/api/v1/transactions/2345987610/debit')
+          .set('Authorization', token)
+          .send({
+            amount: 1000,
+          })
+          .end((err, res) => {
+            expect(res).to.have.status(403);
+            expect(res.body).to.be.a('object');
+            expect(res.body.status).to.equal(403);
+            expect(res.body).to.have.property('error');
+            done();
+          });
+      });
+  });
+
   it('should not debit account when amount is empty', (done) => {
     chai.request(app)
       .post(signInUrl)
