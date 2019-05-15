@@ -13,8 +13,8 @@ const signInUrl = '/api/v1/auth/signin';
 const accountUrl = '/api/v1/accounts';
 const accountUpdateUrl = '/api/v1/accounts/2345987610';
 const accountDeleteUrl = '/api/v1/accounts/9874561230';
-const accountDebitUrl = '/api/v1/transactions/2345987610/debit';
-const accountCreditUrl = '/api/v1/transactions/2345987610/credit';
+const accountDebitUrl = '/api/v1/transactions/1289437654/debit';
+const accountCreditUrl = '/api/v1/transactions/1289437654/credit';
 const getAllAccountsByEmail = '/api/v1//user/ade.banke@example.com/accounts';
 
 describe('Test for wrong route', () => {

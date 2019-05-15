@@ -35,24 +35,27 @@
                     </div>
             </aside>
 
-            <div class="acctProcess">
-                <h3>Initate Deposit</h3>
-                <form action="">
-                    <input type="number" name="acctNumber" id="acctNumber" placeholder="Account Number" required>
-                    <br>
-                    <input type="number" name="amount" id="amount" placeholder="Amount" required>
-                    <br>
-                    <input type="text" name="depositor" id="depositor" placeholder="Depositor's Name" required>
-                    <br>
-                    
-                    <input type="button" value="Credit">
-                </form>
-            </div>
+            <div class="transactionContainer">
+                <div class="msgContainer" id="msgContainer"></div>
+                
+                <div class="acctProcess">
+                        <h3>Initiate Deposit</h3>
+                        <form action="" id="credit">
+                            <input type="number" name="acctNumber" id="acctNumber" placeholder="Account Number" required>
+                            <br>
+                            <input type="number" name="amount" id="amount" placeholder="Amount" required>
+                            <br>
+                            <!-- <input type="text" name="depositor" id="depositor" placeholder="Depositor's Name" required>
+                            <br> -->
+                            
+                            <input id="credit-btn" type="submit" value="Credit">
+                        </form>
+                </div>
             </section>
         </main>
     </div>
     <footer>Copyright &copy; Banka 2019</footer>
 
-<script src="../script/clientProfile.js"></script>
+<script src="../script/transact.js"></script>
 </body>
 </html>
