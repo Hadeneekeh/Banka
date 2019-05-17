@@ -258,7 +258,6 @@ td button {
 #acctTable {
     width: 980px;
     height: 700px;
-    overflow: auto;
     flex-flow: row wrap;
 }
 #search {
@@ -327,6 +326,11 @@ td button {
     background: red;
     color: #f4f4ef;
     font-size: 20px;
+}
+#tableCont {
+    margin-top: 20px;
+    overflow: auto;
+    height: 400px;
 }
 
 

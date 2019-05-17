@@ -13,10 +13,10 @@ const queries = {
     getAnAccount: 'SELECT * FROM accounts WHERE accountNumber=$1',
     deleteAnAccount: 'DELETE FROM accounts WHERE accountNumber=$1 RETURNING *',
     updateAccountBal: 'UPDATE accounts SET balance=$1 WHERE accountNumber=$2',
-    getAllAccounts: 'SELECT * FROM accounts',
+    getAllAccounts: 'SELECT * FROM accounts JOIN users ON accounts.owner = users.id',
     getAnAcctByEmail: `SELECT accounts.accountnumber, accounts.createdon, accounts.type, accounts.status, accounts.balance 
         FROM users JOIN accounts ON users.id = accounts.owner WHERE users.email=$1`,
-    getDormantAcct: `SELECT accounts.createdon, accounts.accountnumber, users.email, accounts.type, accounts.status, accounts.balance 
+    getDormantAcct: `SELECT accounts.createdon, accounts.accountnumber, users.email, accounts.type, accounts.status, accounts.balance, users.firstname, users.lastname 
         FROM users JOIN accounts ON users.id = accounts.owner WHERE accounts.status=$1`,
     findAnAccount: 'SELECT * FROM accounts JOIN users ON accounts.owner = users.id WHERE accountNumber=$1 AND users.id=$2',
     getAUserAcctByEmail: `SELECT accounts.accountnumber, accounts.createdon, accounts.type, accounts.status, accounts.balance 
