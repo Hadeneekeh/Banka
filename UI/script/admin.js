@@ -57,7 +57,7 @@ getAccount.addEventListener('submit', (event) => {
             <td>${account.firstname} ${account.lastname}</td>
             <td>${account.type}</td>
             <td>${account.status}</td>
-            <td><button id="updateBtn" onclick="changeStatus(${account.accountnumber}, 'dormant')">Activate</button></td>
+            <td><button id="updateBtn" onclick="changeStatus(${account.accountnumber}, 'dormant')">Deactivate</button></td>
             <td><button id="deleteBtn" disabled style="background:grey; cursor:none; ">Delete</button></td>        
         </tr>
             `;
