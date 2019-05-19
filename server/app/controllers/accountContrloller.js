@@ -101,6 +101,12 @@ const accounts = {
       }
 
       const { rows } = await db.query(accountQuery.accounts.getDormantAcct, [req.query.status]);
+      if (!rows) {
+        return res.status(404).json({
+          ststus: res.statusCode,
+          error: 'No Account found',
+        });
+      }
 
       return res.status(200).json({
         status: res.statusCode,
